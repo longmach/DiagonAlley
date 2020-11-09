@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+        <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark my-2 my-md-0 mr-md-3">
+        <h5 class="py-1 logo my-0 mr-md-auto font-weight-normal">Diagon Alley Logo</h5>
+        <a class="py-1 d-none d-md-inline-block" href="search.html">Search</a>
+        <a class="py-1 d-none d-md-inline-block" href="addNewEntries.html">Add New</a>
+
+    </nav>
+    <div class="justify-content-center mt-3">
+    <!-- add new customer -->
+    <fieldset>
+        <form method="POST" id="customer">
+            <div class="container"><h4><strong>Add a new customer</strong></h4></div>
+            <div class="container newCustomer">
+                <div class="form-group">
+                    <label for="username" class="align-center">Username:</label>
+                    <input type="text" class="form-control" id="username" placeholder="Username">
+                    <label for="password" class="align-center">Password:</label>
+                    <input type="text" class="form-control" id="password" placeholder="Password">
+                    <label for="username" class="align-center">Email:</label>
+                    <input type="text" class="form-control" id="email" placeholder="email">
+                    <label for="username" class="align-center">First Name:</label>
+                    <input type="text" class="form-control" id="firstName" placeholder="first name">
+                    <label for="username" class="align-center">Last Name: </label>
+                    <input type="text" class="form-control" id="lastName" placeholder="last name">
+                    <label for="username" class="align-center">Created Date: </label>
+                    <input type="text" class="form-control" id="createdDate" placeholder="Created Date Format: 2020-11-07">   
+                    <label for="username" class="align-center">Community</label>
+                    <select name="community" id="customerID">
+                        <option value="SELECT">SELECT</option>
+                        <option value="id_01">Hogwarts</option>
+                        <option value="id_02">Beauxbatons</option>
+                        <option value="id_03">Durmstrang</option>
+                        <option value="id_04">Ilvermorny</option>
+                        <option value="id_05">Uagadou</option>
+                        <option value="id_06">Mahoutokoro</option>
+                        <option value="id_07">null</option>
+                    </select> 
+                </div>
+                <div class="wishListSubmit">
+                    <button type="submit" data-align="center" class="btn btn-info mb-2">Add Entry</button>
+                </div>
+                <p>
+                    If you don't see the community you'd like to see, please add the community in the <a href="#newCommunity">Add Community</a> section.
+                </p>
+            </div>
+        </form>
+    </fieldset>
+    <hr>
+    <!-- add new order to existing customer -->
+    <fieldset>
+        <form method="POST" id="order">
+            <div class="container"><h4><strong>Add a new order</strong></h4></div>
+            <div class="container newOrder">
+                <div class="form-group">
+
+                    <label for="customerID" class="align-center">Customer ID</label>
+                    <select name="customerID" id="customerID">
+                        <option value="SELECT">SELECT</option>
+                        <option value="id_01">id_01</option>
+                        <option value="id_02">id_02</option>
+                        <option value="id_03">id_03</option>
+                        <option value="id_04">id_04</option>
+                    </select>
+                    <hr>
+                    <label for="orderDate" class="align-center">Order Date</label>
+                    <input type="text" class="form-control" id="orderDate" placeholder="Order Date Format: 2020-11-07">   
+
+                </div>
+                <div class="order">
+                    <button type="submit" data-align="center" class="btn btn-info mb-2">Add Entry</button>
+                </div>
+            </div>
+        </form>
+    </fieldset>
+    <hr>
+    <!-- add items to order -->
+    <fieldset>
+        <form method="POST" id="orderItems">
+            <div class="container"><h4><strong>Add items to an order</strong></h4></div>
+            <div class="container orderItems">
+                <div class="form-group">
+                    <label for="customerID" class="align-center">Customer ID</label>
+                    <select name="customerID" id="customerID">
+                        <option value="SELECT">SELECT</option>
+                        <option value="id_01">id_01</option>
+                        <option value="id_02">id_02</option>
+                        <option value="id_03">id_03</option>
+                        <option value="id_04">id_04</option>
+                    </select>
+
+                    <label for="orderID" class="align-center">Order</label>
+                    <select name="orderID" id="orderID">
+                        <option value="SELECT">SELECT</option>
+                        <option value="order_ID_01">order_ID_01</option>
+                        <option value="order_ID_02">order_ID_02</option>
+                        <option value="order_ID_03">order_ID_03</option>
+                        <option value="order_ID_04">order_ID_04</option>
+                    </select>
+
+                    <label for="username" class="align-center">Item to Add:</label>
+                    <select name="itemList" id="itemList">
+                        <option value="TheFirebolt">The Firebolt</option>
+                        <option value="SchoolRobes">School Robes</option>
+                        <option value="Cauldron">Cauldron</option>
+                        <option value="ElderWand">Elder Wand</option>
+                        <option value="Remembrall">Remembrall</option>
+                        <option value="SkivingSnackbox">Skiving Snackbox</option>
+                        <option value="Deluminator">Deluminator</option>
+                        <option value="Sneakoscope">Sneakoscope</option>
+                    </select>
+                    <label for="quantityOrdered" class="align-center">Quantity: </label>
+                    <select name="quantityOrdered" id="quantityOrdered">
+                        <option value="amount_1">1</option>
+                        <option value="amount_2">2</option>
+                        <option value="amount_3">3</option>
+                        <option value="amount_4">4</option>
+                        <option value="amount_5">5</option>
+                        <option value="amount_6">6</option>
+                        <option value="amount_7">7</option>
+                        <option value="amount_8">8</option>
+                        <option value="amount_9">9</option>
+                    </select>
+
+                    <button class="btn btn-info mb-2"> Add another item</button>
+                </div>
+                <div class="order">
+                    <button type="submit" data-align="center" class="btn btn-info mb-2">Add Entry</button>
+                </div>
+            </div>
+        </form>
+    </fieldset>
+    <hr>
+    <!-- add new items -->
+    <fieldset>
+        <form method="POST" id="items">
+            <div class="container"><h4><strong>Add new items</strong></h4></div>
+            <div class="container newItems">
+                <div class="form-group">
+
+                    <label for="itemName" class="align-center">New item:</label>
+                    <input type="text" class="form-control" id="itemName" placeholder="item name">
+
+                    <label for="quantity" class="align-center">Quantity Available:</label>
+                    <input type="text" class="form-control" id="itemQuantity" placeholder="item quantity">
+
+                    <label for="itemCost" class="align-center">Item Cost:</label>
+                    <input type="text" class="form-control" id="itemCost" placeholder="item cost">
+
+                    <label for="itemSellPrice" class="align-center">Item Sell Price:</label>
+                    <input type="text" class="form-control" id="itemSellPrice" placeholder="item sell price">
+                </div>
+                <div class="order">
+                    <button type="submit" data-align="center" class="btn btn-info mb-2">Add Entry</button>
+                </div>
+            </div>
+        </form>
+    </fieldset>
+    <hr>
+    <!-- add communities to existing user -->
+    <!-- add new community -->
+    <fieldset>
+    <form method="POST" id="newCommunity">
+        <div class="container"><h4><strong>Add new community</strong></h4></div>
+        <div class="container newCommunity">
+            <div class="form-group">
+
+                <label for="communityName" class="align-center">New community:</label>
+                <input type="text" class="form-control" id="communityName" placeholder="community name">
+
+                <label for="discount" class="align-center">Discount Available to Customer:</label>
+                <input type="text" class="form-control" id="itemdiscountQuantity" placeholder="discount">
+
+            </div>
+            <div class="communityAdd">
+                <button type="submit" data-align="center" class="btn btn-info mb-2">Add Entry</button>
+            </div>
+        </div>
+    </form>
+    </fieldset>
+    </div>
+
+
+
+
+</body>
+</html>

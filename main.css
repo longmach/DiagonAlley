@@ -1,7 +1,12 @@
+.navbar a{
+    float:left;
+    text-align: center;
+}
 .logo{
     color: white;
 }
 .py-1{
-    padding-left: 1%;
+    float: left;
     color: white;
+    margin-right: 5px;
 }
