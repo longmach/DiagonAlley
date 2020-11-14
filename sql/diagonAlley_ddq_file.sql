@@ -13,7 +13,7 @@ CREATE TABLE customers(
 DROP TABLE IF EXISTS purchase_orders;
 CREATE TABLE purchase_orders(
 	order_ID INT(11) AUTO_INCREMENT PRIMARY KEY,
-	customer_ID INT(11) NOT NULL, # foreign key 
+	customer_ID INT(11) NOT NULL, -- foreign key 
     order_date DATE NOT NULL,
 	FOREIGN KEY (customer_ID) REFERENCES customers(customer_ID)
 );
@@ -34,25 +34,25 @@ CREATE TABLE communities(
     discount INT(11) NOT NULL
 );
 
-# composite entity showing M:M between items and purchase_orders
+-- composite entity showing M:M between items and purchase_orders
 DROP TABLE IF EXISTS purchase_order_details;
 CREATE TABLE purchase_order_details(
-	oid INT(11) NOT NULL,# foreign key, oid = order_ID
-	iid INT(11) NOT NULL, # foreign key, iid = item_ID
+	oid INT(11) NOT NULL, -- foreign key, oid = order_ID
+	iid INT(11) NOT NULL, -- foreign key, iid = item_ID
     quantity_ordered INT(11) NOT NULL,
     PRIMARY KEY(oid,iid),
-	FOREIGN KEY (oid) REFERENCES purchase_orders(order_ID), #the name pod_fk_order = purchase_order_details foreign key order
-    FOREIGN KEY (iid) REFERENCES items(item_ID) # the name pod_fk_item = purchase_order_details foreign key item
+	FOREIGN KEY (oid) REFERENCES purchase_orders(order_ID), -- #the name pod_fk_order = purchase_order_details foreign key order
+    FOREIGN KEY (iid) REFERENCES items(item_ID) --  the name pod_fk_item = purchase_order_details foreign key item
 );
 
-# composite entity showing M:M between customers and communities
+-- composite entity showing M:M between customers and communities
 DROP TABLE IF EXISTS user_communities;
 CREATE TABLE user_communities(
 	customer_ID INT(11) NOT NULL , 
-	community_ID INT(11) NOT NULL, 
-    PRIMARY KEY(customer_ID, community_ID), # primary key is a combo between customer_ID and community_ID
-	CONSTRAINT uc_fk_customer FOREIGN KEY (customer_ID) REFERENCES customers(customer_ID), #the name uc_fk_customer = user_communities foreign key customer
-    CONSTRAINT uc_fk_community FOREIGN KEY (community_ID) REFERENCES communities(community_ID) #the name uc_fk_community = user_communities foreign key community
+	community_ID INT(11) NULL, -- make this nullable
+    PRIMARY KEY(customer_ID, community_ID), -- primary key is a combo between customer_ID and community_ID
+	CONSTRAINT uc_fk_customer FOREIGN KEY (customer_ID) REFERENCES customers(customer_ID), --  the name uc_fk_customer = user_communities foreign key customer
+    CONSTRAINT uc_fk_community FOREIGN KEY (community_ID) REFERENCES communities(community_ID) --  the name uc_fk_community = user_communities foreign key community
 );
 
 -- part B -- 

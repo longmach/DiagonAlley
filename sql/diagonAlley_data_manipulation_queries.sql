@@ -16,6 +16,7 @@ SELECT name, inventory_quantity, cost, price FROM items WHERE name = :name_from_
 SELECT order_ID, customer_ID, order_date FROM purchase_orders WHERE order_ID = :order_ID_from_purchase_order_page;										-- purchase_orders page
 	
 -- get all data from the tables
+-- we could do a select*from x_table
 SELECT first_name,last_name, email, username, password, created_date FROM customers;																	-- customer page
 SELECT name, discount FROM communities;																													-- communities page
 SELECT name, inventory_quantity, cost, price FROM items;																								-- item page
@@ -39,10 +40,10 @@ UPDATE purchase_orders SET order_ID = :order_ID_from_update_form, customer_ID = 
 UPDATE purchase_order_details SET oid = :order_ID_from_update_form, iid = :item_ID_from_update_form, quantity_ordered = quantity_ordered_from_update_form WHERE oid = :order_ID_from_update_form;	-- M-to-M relationship update
 
 -- delete a character
-DELETE FROM customers WHERE customer_ID = :customer_ID_from_delete_form
-DELETE FROM communities WHERE community_ID = :community_ID_from_delete_form
-DELETE FROM items WHERE item_ID = :item_ID_from_delete_form
-DELETE FROM purchase_orders WHERE order_ID = :order_ID_from_delete_form
-DELETE FROM purchase_order_details WHERE oid = :oid_from_delete_form AND iid = :iid_from_delete_form													-- M-to-M relationship deletion
+DELETE FROM customers WHERE customer_ID = :customer_ID_from_delete_form;
+DELETE FROM communities WHERE community_ID = :community_ID_from_delete_form;
+DELETE FROM items WHERE item_ID = :item_ID_from_delete_form;
+DELETE FROM purchase_orders WHERE order_ID = :order_ID_from_delete_form;
+DELETE FROM purchase_order_details WHERE oid = :oid_from_delete_form AND iid = :iid_from_delete_form;												-- M-to-M relationship deletion
 
 
