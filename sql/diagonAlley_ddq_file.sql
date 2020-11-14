@@ -41,7 +41,7 @@ CREATE TABLE purchase_order_details(
 	iid INT(11) NOT NULL, -- foreign key, iid = item_ID
     quantity_ordered INT(11) NOT NULL,
     PRIMARY KEY(oid,iid),
-	FOREIGN KEY (oid) REFERENCES purchase_orders(order_ID), -- #the name pod_fk_order = purchase_order_details foreign key order
+	FOREIGN KEY (oid) REFERENCES purchase_orders(order_ID), -- the name pod_fk_order = purchase_order_details foreign key order
     FOREIGN KEY (iid) REFERENCES items(item_ID) --  the name pod_fk_item = purchase_order_details foreign key item
 );
 
