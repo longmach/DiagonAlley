@@ -26,6 +26,7 @@
 
 </head>
 <body>
+    g
     <nav class="navbar navbar-dark bg-dark my-2 my-md-0 mr-md-3">
         <h5 class="logo my-0 mr-md-auto font-weight-normal">Diagon Alley Logo</h5>
         <a class="py-1 d-none d-md-inline-block" href="customer.html">Customers</a>
@@ -41,11 +42,33 @@
     </p>
     <div class="justify-content-center mt-3">
         <div class="container">
+            <h3>All data for this table:</h3>
+            <table>
+                <thead>
+                    <th>Item ID</th>
+                    <th>Name</th>
+                    <th>Available Quantity</th>
+                    <th>Cost</th>
+                    <th>Selling Price</th>
+                </thead>
+                <tbody>
+                    {% for c in items %}
+                    <tr>
+                        <td>{{c[0]}}</td>
+                        <td>{{c[1]}}</td>
+                        <td>{{c[2]}}</td>
+                        <td>{{c[3]}}</td>
+                        <td>{{c[4]}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
             <h3>Search by Item:</h3>
-            <form>
+            <!-- add form name, post, add name to input and button -->
+            <form method="POST" class="searchByItemName">
                 <label>Item Name:</label>
-                <input type="text" id="searchByItem">
-                <button class="submitButton" id="submitItemName">Submit</button>
+                <input type="text" id="searchByItem" name="itemName">
+                <button class="submitButton" id="submitItemName" name = "searchByItemName">Submit</button>
             </form>
 
 
@@ -53,11 +76,32 @@
             <div id="resultsHere">
                 <p id="searchResults">A table will be dynamically populated here as the results from the searches above. (similar format with below tables)</p>
             </div>
+            <table>
+                <thead>
+                    <th>Item ID</th>
+                    <th>Name</th>
+                    <th>Available Quantity</th>
+                    <th>Cost</th>
+                    <th>Selling Price</th>
+                </thead>
+                <tbody>
+                    {% for c in filteredItems %}
+                    <tr>
+                        <td>{{c[0]}}</td>
+                        <td>{{c[1]}}</td>
+                        <td>{{c[2]}}</td>
+                        <td>{{c[3]}}</td>
+                        <td>{{c[4]}}</td>
+                        <td>{{c[5]}}</td>
+                        <td>{{c[6]}}</td>
+                        <td>{{c[7]}}</td>
+                        <td>{{c[8]}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
             <br>
             <br>
-
-            <h3>Or show all data in a table:</h3>
-            <button>All Items</button>
 
             <div id="showTable">
                 <p>
@@ -150,25 +194,25 @@
     <div class="justify-content-center mt-3">
     <!-- add new items to db --> 
         <fieldset>
-            <form method="POST" id="items">
+            <form method="POST" id="items" name="insertItem">
                 <div class="container"><h4><strong>Add new items</strong></h4></div>
                 <div class="container newItems">
                     <div class="form-group">
     
                         <label for="itemName" class="align-center">New item:</label>
-                        <input type="text" class="form-control" id="itemName" placeholder="item name">
+                        <input type="text" class="form-control" id="itemName" placeholder="item name" name="itemName">
     
                         <label for="quantity" class="align-center">Quantity Available:</label>
-                        <input type="text" class="form-control" id="itemQuantity" placeholder="item quantity">
+                        <input type="text" class="form-control" id="itemQuantity" placeholder="item quantity" name="itemQuantity">
     
                         <label for="itemCost" class="align-center">Item Cost:</label>
-                        <input type="text" class="form-control" id="itemCost" placeholder="item cost">
+                        <input type="text" class="form-control" id="itemCost" placeholder="item cost" name="itemCost">
     
                         <label for="itemSellPrice" class="align-center">Item Sell Price:</label>
-                        <input type="text" class="form-control" id="itemSellPrice" placeholder="item sell price">
+                        <input type="text" class="form-control" id="itemSellPrice" placeholder="item sell price" name="itemPrice">
                     </div>
                     <div class="order">
-                        <button type="submit" data-align="center" class="btn btn-info mb-2">Add Entry</button>
+                        <button type="submit" data-align="center" class="btn btn-info mb-2" name="insertItem">Add Entry</button>
                     </div>
                 </div>
             </form>

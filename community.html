@@ -41,11 +41,29 @@
     </p>
     <div class="justify-content-center mt-3">
         <div class="container">
+            <h3>All data in a table:</h3>
+            <!-- <input type="submit" name="showAllCommunities" value="All Communities"/> -->
+            <table>
+                <thead>
+                    <th>Community Name</th>
+                    <th>Discount</th>
+                </thead>
+                <tbody>
+                    {% for c in communities %}
+                    <tr>
+                        <td>{{c[0]}}</td>
+                        <td>{{c[1]}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
             <h3>Search by Community:</h3>
-            <form>
+            <!-- add form name, post, add name to input and button -->
+            <form method="POST" class="searchByCommunity">
             <label>Community Name:</label>
-            <input type="text" id="searchByCommunity">
-            <button class="submitButton" id="submitCommunityName">Submit</button>
+            <input type="text" id="searchByCommunity" name="communityName">
+            <button class="submitButton" id="submitCommunityName" name="searchByCommunity">Submit</button>
             </form>
 
 
@@ -53,12 +71,22 @@
             <div id="resultsHere">
             <p id="searchResults">A table will be dynamically populated here as the results from the searches above. (similar format with below tables)</p>
             </div>
+            <table>
+                <thead>
+                    <th>Community Name</th>
+                    <th>Discount</th>
+                </thead>
+                <tbody>
+                    {% for c in filteredCommunities %}
+                    <tr>
+                        <td>{{c[0]}}</td>
+                        <td>{{c[1]}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
             <br>
             <br>
-
-            <h3>Or show all data in a table:</h3>
-
-            <button>All Community</button>
             <div id="showTable">
                 <p>
                     A table will be dynamically populated here as the results after the employee click one of the button above.
@@ -131,20 +159,20 @@
     <div class="justify-content-center mt-3">
     <!-- add new community -->
         <fieldset>
-            <form method="POST" id="newCommunity">
+            <form method="POST" id="newCommunity" class="insertNewCommunity">
                 <div class="container"><h4><strong>Add new community</strong></h4></div>
                 <div class="container newCommunity">
                     <div class="form-group">
         
                         <label for="communityName" class="align-center">New community:</label>
-                        <input type="text" class="form-control" id="communityName" placeholder="community name">
+                        <input type="text" class="form-control" id="communityName" placeholder="community name" name="communityName">
         
                         <label for="discount" class="align-center">Discount Available to Customer:</label>
-                        <input type="text" class="form-control" id="itemdiscountQuantity" placeholder="discount">
+                        <input type="text" class="form-control" id="itemdiscountQuantity" placeholder="discount" name="communityDiscount">
         
                     </div>
                     <div class="communityAdd">
-                        <button type="submit" data-align="center" class="btn btn-info mb-2">Add Entry</button>
+                        <button type="submit" data-align="center" class="btn btn-info mb-2" name="insertNewCommunity">Add Entry</button>
                     </div>
                 </div>
             </form>

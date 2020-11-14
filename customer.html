@@ -41,7 +41,7 @@
       </p>
     <div class="justify-content-center mt-3">
         <div class="container">
-            <h3>All data in a table:</h3>
+            <h3>All data for this table:</h3>
             <!-- <input type="submit" name="showAllCustomers" value="All Customers"/> -->
             <table>
                 <thead>
@@ -52,20 +52,18 @@
                     <th>Username</th>
                     <th>Password</th>
                     <th>Created Date</th>
-                    <th>Community</th>
                 </thead>
                 <tbody>
-                    {% for r in rows %}
+                    {% for c in customers %}
                     <tr>
-                        <td>{{r[0]}}</td>
-                        <td>{{r[1]}}</td>
-                        <td>{{r[2]}}</td>
-                        <td>{{r[3]}}</td>
-                        <td>{{r[4]}}</td>
-                        <td>{{r[5]}}</td>
-                        <td>{{r[6]}}</td>
-                        <td>{{r[7]}}</td>
-                        <td>{{r[8]}}</td>
+                        <td>{{c[0]}}</td>
+                        <td>{{c[1]}}</td>
+                        <td>{{c[2]}}</td>
+                        <td>{{c[3]}}</td>
+                        <td>{{c[4]}}</td>
+                        <td>{{c[5]}}</td>
+                        <td>{{c[6]}}</td>
+                        <td>{{c[7]}}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -75,7 +73,8 @@
             <h3>Search for a Specific customer:</h3>
             <form method="POST" id="filteredCustomerSearch">
             <label>Customer Name:</label>
-            <input type="text" class = "searchByCustomerName" id="searchByCustomerName" name = "searchByCustomerName">
+            <input type="text" class = "searchByCustomerFirstName" id="searchByCustomerName" name = "searchByCustomerFirstName" required>
+            <input type="text" class = "searchByCustomerLastName" id="searchByCustomerName" name = "searchByCustomerLastName" required>
             <button class="submitButton" id="submitCustomerName">Submit</button>
             </form>
 
@@ -84,6 +83,31 @@
             <div id="resultsHere">
             <p id="searchResults">A table will be dynamically populated here as the results from the searches above. (similar format with below tables)</p>
             </div>
+            <table>
+                <thead>
+                    <th>Customer ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>Created Date</th>
+                </thead>
+                <tbody>
+                    {% for c in filteredCustomer %}
+                    <tr>
+                        <td>{{c[0]}}</td>
+                        <td>{{c[1]}}</td>
+                        <td>{{c[2]}}</td>
+                        <td>{{c[3]}}</td>
+                        <td>{{c[4]}}</td>
+                        <td>{{c[5]}}</td>
+                        <td>{{c[6]}}</td>
+                        <td>{{c[7]}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
             <br>
             <br>
             <div id="showTable">
@@ -101,7 +125,6 @@
                                 <th>Username</th>
                                 <th>Password</th>
                                 <th>Created Date</th>
-                                <th>Community</th>
                             </tr>
                             <tr>
                                 <td>
@@ -136,18 +159,13 @@
                                 </td>
                                 <td>
                                     <form>
-                                    <input id="community" type="text" value="Hogwarts">
-                                    </form>
-                                </td>
-                                <td>
-                                    <form>
-                                    <button class="updateButton" id="updateButton">Update</button>
+                                    <button class="updateButton" id="updateButton" name="updateButton">Update</button>
                                     </form>
                                 </td>
                                 
                                 <td>
                                     <form>
-                                    <button class="deleteButton" id="deleteButton">Delete</button>
+                                    <button class="deleteButton" id="deleteButton" name="deleteButton">Delete</button>
                                     </form>
                                 </td>
                             </tr>
@@ -167,18 +185,18 @@
                 <div class="container newCustomer">
                     <div class="form-group">
                         <label for="username" class="align-center">Username:</label>
-                        <input type="text" class="form-control" id="username" placeholder="Username">
+                        <input type="text" class="form-control" id="username" placeholder="Username" name="username">
                         <label for="password" class="align-center">Password:</label>
-                        <input type="text" class="form-control" id="password" placeholder="Password">
+                        <input type="text" class="form-control" id="password" placeholder="Password" name="password">
                         <label for="username" class="align-center">Email:</label>
-                        <input type="text" class="form-control" id="email" placeholder="email">
+                        <input type="text" class="form-control" id="email" placeholder="email" name="email">
                         <label for="username" class="align-center">First Name:</label>
-                        <input type="text" class="form-control" id="firstName" placeholder="first name">
+                        <input type="text" class="form-control" id="firstName" placeholder="first name" name="first_name">
                         <label for="username" class="align-center">Last Name: </label>
-                        <input type="text" class="form-control" id="lastName" placeholder="last name">
+                        <input type="text" class="form-control" id="lastName" placeholder="last name" name="last_name">
                         <label for="username" class="align-center">Created Date: </label>
-                        <input type="text" class="form-control" id="createdDate" placeholder="Created Date Format: 2020-11-07">   
-                        <label for="username" class="align-center">Community</label>
+                        <input type="text" class="form-control" id="createdDate" placeholder="Created Date Format: 2020-11-07" name="createDateUser">   
+                        <!-- <label for="username" class="align-center">Community</label>
                         <select name="community" id="customerID">
                             <option value="SELECT">SELECT</option>
                             <option value="id_01">Hogwarts</option>
@@ -188,13 +206,13 @@
                             <option value="id_05">Uagadou</option>
                             <option value="id_06">Mahoutokoro</option>
                             <option value="id_07">null</option>
-                        </select> 
+                        </select>  -->
                     </div>
                     <div class="wishListSubmit">
-                        <button type="submit" data-align="center" class="btn btn-info mb-2">Add Entry</button>
+                        <button type="submit" data-align="center" class="btn btn-info mb-2" name="addCustomer">Add Entry</button>
                     </div>
                     <p>
-                        If you don't see the community you'd like to see, please add the community in the <a href="#newCommunity">Add Community</a> section.
+                        If you don't see the community you'd like to see, please add the community in the <a href="community.html">Add Community</a> section.
                     </p>
                 </div>
             </form>
