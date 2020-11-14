@@ -57,11 +57,17 @@ CREATE TABLE user_communities(
 
 -- part B -- 
 -- insert into customers  -- 
-INSERT INTO customers(username, password, email, first_name, last_name, created_date) VALUES (
-"potterH", "password", "potterh@hogwarts.edu", "Harry", "Potter", "2020-11-10");
+INSERT INTO customers(username, password, email, first_name, last_name, created_date) VALUES 
+("potterH", "password", "potterh@hogwarts.edu", "Harry", "Potter", "2020-11-10"),
+("weasleyR", "contrasena", "weasleyr@hogwarts.edu", "Ron", "Weasley", "2020-12-10"),
+("grangerH", "parola", "grangerh@hogwarts.edu", "Hermione", "Granger", "2020-11-14")
+;
 -- insert into purchase order -- 
-INSERT INTO purchase_orders(customer_ID, order_date) VALUES(
-(SELECT customer_ID from customers WHERE username = "potterH"), "2020-11-12");
+INSERT INTO purchase_orders(customer_ID, order_date) VALUES
+((SELECT customer_ID from customers WHERE username = "potterH"), "2020-11-12"),
+((SELECT customer_ID from customers WHERE username = "weasleyR"), "2020-12-12"),
+((SELECT customer_ID from customers WHERE username = "grangerH"), "2020-12-12")
+;
 -- insert into items-- 
 INSERT INTO items(name, inventory_quantity, cost, price) VALUES
 ("Firebolt", 1000, 250, 900),
@@ -82,11 +88,13 @@ INSERT INTO communities(name, discount) VALUES
 ("Uagadou", 5), 
 ("Mahoutokoro", 5);
 -- insert into purchase_order_details -- 
-INSERT INTO purchase_order_details(oid, iid, quantity_ordered) VALUES(
-(SELECT purchase_orders.order_ID from purchase_orders WHERE purchase_orders.customer_ID = (SELECT customer_ID FROM customers WHERE customers.username = "potterH")), 
-(SELECT item_ID FROM items WHERE items.name = "Firebolt"), 1);
+INSERT INTO purchase_order_details(oid, iid, quantity_ordered) VALUES
+((SELECT purchase_orders.order_ID from purchase_orders WHERE purchase_orders.customer_ID = (SELECT customer_ID FROM customers WHERE customers.username = "potterH")), (SELECT item_ID FROM items WHERE items.item_ID = 1), 1),
+((SELECT purchase_orders.order_ID from purchase_orders WHERE purchase_orders.customer_ID = (SELECT customer_ID FROM customers WHERE customers.username = "weasleyR")), (SELECT item_ID FROM items WHERE items.item_ID = 2), 5),
+((SELECT purchase_orders.order_ID from purchase_orders WHERE purchase_orders.customer_ID = (SELECT customer_ID FROM customers WHERE customers.username = "grangerH")), (SELECT item_ID FROM items WHERE items.item_ID = 4), 1);
 -- insert into user_communities -- 
-INSERT INTO user_communities(customer_ID, community_ID) VALUES(
-(SELECT customers.customer_ID from customers WHERE username = "potterH"), (SELECT communities.community_ID FROM communities WHERE communities.name = "Hogwarts")
-);
+INSERT INTO user_communities(customer_ID, community_ID) VALUES
+((SELECT customers.customer_ID from customers WHERE username = "potterH"), (SELECT communities.community_ID FROM communities WHERE communities.name = "Hogwarts")),
+((SELECT customers.customer_ID from customers WHERE username = "weasleyR"), (SELECT communities.community_ID FROM communities WHERE communities.name = "Hogwarts")),
+((SELECT customers.customer_ID from customers WHERE username = "grangerH"), (SELECT communities.community_ID FROM communities WHERE communities.name = "Hogwarts"));
 
