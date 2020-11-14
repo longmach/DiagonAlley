@@ -41,10 +41,41 @@
       </p>
     <div class="justify-content-center mt-3">
         <div class="container">
+            <h3>All data in a table:</h3>
+            <!-- <input type="submit" name="showAllCustomers" value="All Customers"/> -->
+            <table>
+                <thead>
+                    <th>Customer ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>Created Date</th>
+                    <th>Community</th>
+                </thead>
+                <tbody>
+                    {% for r in rows %}
+                    <tr>
+                        <td>{{r[0]}}</td>
+                        <td>{{r[1]}}</td>
+                        <td>{{r[2]}}</td>
+                        <td>{{r[3]}}</td>
+                        <td>{{r[4]}}</td>
+                        <td>{{r[5]}}</td>
+                        <td>{{r[6]}}</td>
+                        <td>{{r[7]}}</td>
+                        <td>{{r[8]}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+
             <h3>Search for a Specific customer:</h3>
-            <form>
+            <form method="POST" id="filteredCustomerSearch">
             <label>Customer Name:</label>
-            <input type="text" id="searchByCustomer">
+            <input type="text" class = "searchByCustomerName" id="searchByCustomerName" name = "searchByCustomerName">
             <button class="submitButton" id="submitCustomerName">Submit</button>
             </form>
 
@@ -55,9 +86,6 @@
             </div>
             <br>
             <br>
-
-            <h3>Or show all data in a table:</h3>
-            <button>All Customers</button>
             <div id="showTable">
                 <p>
                     A table will be dynamically populated here as the results after the employee click one of the button above.
