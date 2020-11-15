@@ -106,27 +106,6 @@ def communities():
         result = execute_query(db_connection, insertQuery, data).fetchall()
         return redirect(url_for("communities"))
 
-# TODO: create user communities html page, finish the queries below
-# format it the same way as the other pages
-# below is unfinished
-@app.route("/userCommunities", methods=["POST", "GET"])
-def userCommunities():
-    db_connection = connect_to_database()
-    if request.method == "GET":
-        getAllQuery = "SELECT * from items"
-        result = execute_query(db_connection, getAllQuery).fetchall()
-        return render_template("userCommunities.html", userCommunities = result)
-    # fix queries below to exchange for real data
-    elif request.method == "POST" and "searchByUserCommunityName" in request.form:
-        userCommunityName = request.form['']
-        filteredSelectQuery = ""
-        result = execute_query(db_connection, filteredSelectQuery).fetchall()
-        return render_template("userCommunities.html", filteredCommunities = result)
-    elif request.method == "POST" and "insertUserCommunity" in request.form:
-        insertQuery = ""
-        result = execute_query(db_connection, insertQuery).fetchall()
-        return redirect(url_for("userCommunities"))
-
 # purchase order
 @app.route("/purchaseOrder", methods=["POST", "GET"])
 def purchaseOrder():
@@ -172,6 +151,29 @@ def purchaseOrderDetails():
         data = (order_ID, item_ID)
         result = execute_query(db_connection, deleteQuery).fetchall()
         return redirect(url_for("purchaseOrderDetails"))
+        
+# TODO: create user communities html page, finish the queries below
+# format it the same way as the other pages
+# below is unfinished
+@app.route("/userCommunities", methods=["POST", "GET"])
+def userCommunities():
+    db_connection = connect_to_database()
+    if request.method == "GET":
+        getAllQuery = "SELECT * from items"
+        result = execute_query(db_connection, getAllQuery).fetchall()
+        return render_template("userCommunities.html", userCommunities = result)
+    # fix queries below to exchange for real data
+    elif request.method == "POST" and "searchByUserCommunityName" in request.form:
+        userCommunityName = request.form['']
+        filteredSelectQuery = ""
+        result = execute_query(db_connection, filteredSelectQuery).fetchall()
+        return render_template("userCommunities.html", filteredCommunities = result)
+    elif request.method == "POST" and "insertUserCommunity" in request.form:
+        insertQuery = ""
+        result = execute_query(db_connection, insertQuery).fetchall()
+        return redirect(url_for("userCommunities"))
+
+# above is unfinished
 
 # allows us to not rerun server everytime we make a change 
 if __name__ == "__main__":
