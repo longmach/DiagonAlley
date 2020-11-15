@@ -165,10 +165,11 @@ def purchaseOrderDetails():
         data = (orderID, itemID, item_quantity)
         result = execute_query(db_connection, insertQuery, data).fetchall()
         return redirect(url_for("purchaseOrderDetails"))
-
-    # TODO: we have to figure out how to make this possible on the html side
-    elif request.method == "POST" and "" in request.form:
+    elif request.method == "POST" and "deleteOrderItemRelationship" in request.form:
+        order_ID = request.form['orderID']
+        item_ID = request.form['itemID']
         deleteQuery = "DELETE FROM purchase_order_details WHERE oid = %s AND iid = %s;"
+        data = (order_ID, item_ID)
         result = execute_query(db_connection, deleteQuery).fetchall()
         return redirect(url_for("purchaseOrderDetails"))
 

@@ -59,6 +59,30 @@
                     {% endfor %}
                 </tbody>
             </table>
+            <hr>
+            <h3>Update User:</h3>
+            <div id="UpdateHere">
+            <p id="update">Update a customer entry by filling out the fields below:</p>
+            </div>
+            <table>
+                <thead>
+                    <th>Order ID</th>
+                    <th>Item ID</th>
+                    <th>Quantity</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <form action="#" method="POST">
+                            <td><input type="text" class="form-control" id="orderID" placeholder="Order ID" name="orderID"></td>
+                            <td><input type="text" class="form-control" id="itemID" placeholder="Item ID" name="itemID"></td>
+                            <td><input type="text" class="form-control" id="quantity" placeholder="quantity" name="quantity"></td>
+                            <div class="container">
+                                <td><button type="submit" data-align="center" class="btn btn-info mb-2" name="deleteOrderItemRelationship">Update Entry</button></td>
+                            </div>
+                        </form>
+                    </tr>
+                </tbody>
+            </table>
 <!-- 
             <div id="showTable">
                 <p>

@@ -79,9 +79,9 @@
             </form>
 
 
-            <h3>Update Customer:</h3>
+            <h3>Search Results Here:</h3>
             <div id="resultsHere">
-            <p id="searchResults">Update a customer entry by filling out the fields below:</p>
+            <p id="searchResults">A table will be dynamically populated here as the results from the searches above. (similar format with below tables)</p>
             </div>
             <table>
                 <thead>
@@ -108,13 +108,14 @@
                     {% endfor %}
                 </tbody>
             </table>
-            <h3>Search Results:</h3>
-            <div id="resultsHere">
-            <p id="searchResults">A table will be dynamically populated here as the results from the searches above. (similar format with below tables)</p>
+            <br>
+            <br>
+            <h3>Update User:</h3>
+            <div id="UpdateHere">
+            <p id="update">Update a customer entry by filling out the fields below:</p>
             </div>
             <table>
                 <thead>
-                    <th>Customer ID</th>
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Email</th>
@@ -130,8 +131,10 @@
                             <td><input type="text" class="form-control" id="email" placeholder="email" name="email"></td>
                             <td><input type="text" class="form-control" id="firstName" placeholder="first name" name="first_name"></td>
                             <td><input type="text" class="form-control" id="lastName" placeholder="last name" name="last_name"></td>
-                            <td><input type="text" class="form-control" id="createdDate" placeholder="Created Date Format: 2020-11-07" name="createDateUser"> </td>
-                            <button type="submit" data-align="center" class="btn btn-info mb-2" name="updateCustomer">Update Entry</button>
+                            <td><input type="text" class="form-control" id="createdDate" placeholder="2020-11-07" name="createDateUser"> </td>
+                            <div class="container">
+                                <td><button type="submit" data-align="center" class="btn btn-info mb-2" name="updateCustomer">Update Entry</button></td>
+                            </div>
                         </form>
                     </tr>
                 </tbody>
