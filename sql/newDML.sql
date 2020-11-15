@@ -28,7 +28,7 @@ INSERT INTO purchase_order_details (oid, iid, quantity_ordered) VALUES (:oid_inp
 INSERT INTO user_communities (customer_ID, community_ID) VALUES (:customer_ID_input, :community_ID_input); -- add new communities to user and vice versa M:M
 
 -- update a character's data based on submission of the Update Character form 
-UPDATE customers SET first_name = :first_name_from_update_form, last_name = :last_name_from_update_form, email = :email_from_update_form, username = :username_from_update_form, created_date = :created_date_input;
+UPDATE customers SET first_name = :first_name_from_update_form, last_name = :last_name_from_update_form, email = :email_from_update_form, username = :username_from_update_form, created_date = :created_date_input WHERE first_name = :first_name_from_update_form AND last_name = :last_name_from_update_form;
 -- delete M:M purchase order details
 DELETE FROM purchase_order_details WHERE oid = :oid_from_delete_form AND iid = :iid_from_delete_form;												-- M-to-M relationship deletion
 

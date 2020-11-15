@@ -5,7 +5,6 @@ from db_connector.db_connector import connect_to_database, execute_query
 ##      {% endfor %}
 # {{ }} allows for any variable to be sent from backend to front end
 
-
 app = Flask(__name__)
 # index
 @app.route("/")
@@ -29,17 +28,17 @@ def customer():
     elif request.method == "POST" and "searchByCustomerName" in request.form:
         f_name = request.form['searchByCustomerFirstName']
         l_name = request.form['searchByCustomerLastName']
-        # changed your single data select query by added another input so now its one for first name and one for last name
-        # TODO: make this change in the sql file too 
+        # changed your single data select query by adding another input so now its one for first name and one for last name
+        # TODO: i changed the sql in a new file check it out. 
         filteredSelectQuery = "SELECT * FROM customers WHERE first_name = %s AND last_name = %s"
         data = (f_name, l_name)
         result = execute_query(db_connection, filteredSelectQuery, data).fetchall()
         return render_template("customer.html", filteredCustomer = result)
 
     # TODO: need to figure out a way to update customer in html side for update button to work correctly
-    # change update query to %s
+    # change update query parameters to %s
     elif request.method == "POST" and "" in request.form:
-        updateQuery= "UPDATE customers SET first_name = :first_name_from_update_form, last_name = :last_name_from_update_form, email = :email_from_update_form, username = :username_from_update_form, created_date = :created_date_input WHERE CONCAT(first_name,' ',last_name) = CONCAT(:first_name_from_update_form,' ',:last_name_from_update_form);"
+        updateQuery= "UPDATE customers SET first_name = :first_name_from_update_form, last_name = :last_name_from_update_form, email = :email_from_update_form, username = :username_from_update_form, created_date = :created_date_input WHERE first_name = :first_name_from_update_form AND last_name = :last_name_from_update_form;"
         result = execute_query(db_connection, updateQuery).fetchall()
         return redirect(url_for("customer"))
 
