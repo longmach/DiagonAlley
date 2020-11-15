@@ -34,10 +34,15 @@ def customer():
         data = (f_name, l_name)
         result = execute_query(db_connection, filteredSelectQuery, data).fetchall()
         return render_template("customer.html", filteredCustomer = result)
-    # TODO: need to figure out a way to update customer in html side for update button to work correctly
-    # change update query parameters to %s
-    elif request.method == "POST" and "" in request.form:
-        updateQuery= "UPDATE customers SET first_name = :first_name_from_update_form, last_name = :last_name_from_update_form, email = :email_from_update_form, username = :username_from_update_form, created_date = :created_date_input WHERE first_name = :first_name_from_update_form AND last_name = :last_name_from_update_form;"
+    elif request.method == "POST" and "updateCustomer" in request.form:
+        f_name = request.form['first_name']
+        l_name = request.form['last_name']
+        email = request.form['email']
+        username = request.form['username']
+        password = request.form['password']
+        created_date = request.form['createDateUser']
+        updateQuery= "UPDATE customers SET first_name = %s, last_name = %s, email = %s, username = %s, created_date = %s WHERE first_name = %s AND last_name = %s;"
+        data = data = (f_name, l_name, email, username, password, created_date, f_name, l_name)
         result = execute_query(db_connection, updateQuery).fetchall()
         return redirect(url_for("customer"))
 
@@ -65,7 +70,7 @@ def items():
     elif request.method == "POST" and "searchByItemName" in request.form:
         item_name = request.form['itemName']
         # I added item_ID to html so we can just do * now
-        # TODO: make this change in sql file
+        # TODO: make this change in sql file or we can just use the one i created 
         filteredSelectQuery = "SELECT * FROM items WHERE name = %s"
         data = [item_name]
         result = execute_query(db_connection, filteredSelectQuery, data).fetchall()
