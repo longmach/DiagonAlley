@@ -86,7 +86,7 @@ def communities():
     db_connection = connect_to_database()
     if request.method == "GET":
         getAllQuery = "SELECT * from items"
-        result = execute_query(db_connection, getAllQuery).fetchall()t)
+        result = execute_query(db_connection, getAllQuery).fetchall()
         return render_template("items.html", communities = result)
     elif request.method == "POST" and "searchByCommunity" in request.form: 
         communityName = request.form["communityName"]
