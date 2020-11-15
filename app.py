@@ -25,7 +25,7 @@ def customer():
         getAllQuery = "SELECT * from customers"
         result = execute_query(db_connection, getAllQuery).fetchall()
         return render_template("customer.html", customers = result)
-    elif request.method == "POST" and "searchByCustomerName" in request.form:
+    elif request.method == "POST" and "searchByCustomerFirstName" in request.form:
         f_name = request.form['searchByCustomerFirstName']
         l_name = request.form['searchByCustomerLastName']
         # changed your single data select query by adding another input so now its one for first name and one for last name
@@ -34,7 +34,6 @@ def customer():
         data = (f_name, l_name)
         result = execute_query(db_connection, filteredSelectQuery, data).fetchall()
         return render_template("customer.html", filteredCustomer = result)
-
     # TODO: need to figure out a way to update customer in html side for update button to work correctly
     # change update query parameters to %s
     elif request.method == "POST" and "" in request.form:
@@ -68,7 +67,7 @@ def items():
         # I added item_ID to html so we can just do * now
         # TODO: make this change in sql file
         filteredSelectQuery = "SELECT * FROM items WHERE name = %s"
-        data = (item_name)
+        data = [item_name]
         result = execute_query(db_connection, filteredSelectQuery, data).fetchall()
         return render_template("items.html", filteredItems = result)
     elif request.method == "POST" and "insertItem" in request.form:
@@ -85,22 +84,22 @@ def items():
 def communities():
     db_connection = connect_to_database()
     if request.method == "GET":
-        getAllQuery = "SELECT * from items"
+        getAllQuery = "SELECT * from communities"
         result = execute_query(db_connection, getAllQuery).fetchall()
-        return render_template("items.html", communities = result)
+        return render_template("community.html", communities = result)
     elif request.method == "POST" and "searchByCommunity" in request.form: 
         communityName = request.form["communityName"]
         filteredSelectQuery = "SELECT * FROM communities WHERE name = %s;"
-        data = (communityName)
+        data = [communityName]
         result = execute_query(db_connection, filteredSelectQuery, data).fetchall()
-        return render_template("items.html", filteredCommunities = result)
+        return render_template("community.html", filteredCommunities = result)
     elif request.method == "POST" and "insertNewCommunity" in request.form:
         communityName = request.form["communityName"]
         communityDiscount = request.form["communityDiscount"]
         insertQuery = "INSERT INTO communities (name, discount) VALUES (%s, %s);"
-        data = (communityName, communityDiscount)
+        data = [communityName, communityDiscount]
         result = execute_query(db_connection, insertQuery, data).fetchall()
-        return redirect(url_for("items"))
+        return redirect(url_for("communities"))
 
 # TODO: create user communities html page, finish the queries below
 # format it the same way as the other pages
@@ -134,7 +133,7 @@ def purchaseOrder():
     elif request.method == "POST" and "searchByPurchaseOrderID" in request.form:
         order_ID = request.form['purchaseOrderID']
         filteredSelectQuery = "SELECT * FROM purchase_orders WHERE order_ID = %s;"
-        data = (order_ID)
+        data = [order_ID]
         result = execute_query(db_connection, filteredSelectQuery,data).fetchall()
         return render_template("purchaseOrder.html", filteredPurchaseOrder = result)
     elif request.method == "POST" and "insertPurchaseOrder" in request.form:

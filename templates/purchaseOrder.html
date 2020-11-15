@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase Order</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/main.css')}}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+        <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark my-2 my-md-0 mr-md-3">
+        <h5 class="logo my-0 mr-md-auto font-weight-normal">Diagon Alley Logo</h5>
+        <a class="py-1 d-none d-md-inline-block" href="customer">Customers</a>
+        <a class="py-1 d-none d-md-inline-block" href="communities">Community</a>
+        <a class="py-1 d-none d-md-inline-block" href="items">Items</a>
+        <a class="py-1 d-none d-md-inline-block" href="purchaseOrder">Purchase Order</a>
+        <a class="py-1 d-none d-md-inline-block" href="purchaseOrderDetails">Purchase Order Details</a>
+
+    </nav>
+    <h1 style="text-align: center">Diagon Alley</h1>
+    <p style="text-align: center">
+        Employees of Diagon Valley can use this page to search details information regarding purchase orders, to update and delete entries in purchase order table,and add entries to purchase order table. 
+    </p>
+    <div class="justify-content-center mt-3">
+        <div class="container">
+            <h3>All data for this table:</h3>
+            <table>
+                <thead>
+                    <th>Order ID</th>
+                    <th>Customer ID</th>
+                    <th>Order Date</th>
+                </thead>
+                <tbody>
+                    {% for c in purchaseOrders %}
+                    <tr>
+                        <td>{{c[0]}}</td>
+                        <td>{{c[1]}}</td>
+                        <td>{{c[2]}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <h3>Search by Purchase Order:</h3>
+            <!-- add form name, post, add name to input and button -->
+            <form method="POST" class="searchByPurchaseOrderID">
+            <label>Purchase Order Number:</label>
+            <input type="number" id="searchByPO" name="purchaseOrderID">
+            <button class="submitButton" id="submitPO" name="searchByPurchaseOrderID">Submit</button>
+            </form>
+
+
+            <h3>Search Results:</h3>
+            <div id="resultsHere">
+            <p id="searchResults">A table will be dynamically populated here as the results from the searches above. (similar format with below tables)</p>
+            </div>
+            <table>
+                <thead>
+                    <th>Order ID</th>
+                    <th>Customer ID</th>
+                    <th>Order Date</th>
+                </thead>
+                <tbody>
+                    {% for c in filteredPurchaseOrder %}
+                    <tr>
+                        <td>{{c[0]}}</td>
+                        <td>{{c[1]}}</td>
+                        <td>{{c[2]}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <!-- <br>
+            <br>
+
+            <div id="showTable">
+                <p>
+                    A table will be dynamically populated here as the results after the employee click one of the button above.
+                </p>
+        
+                <div id="showTable">
+                <p>
+                
+                Example table for Purchase Order
+                </p>
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer ID</th>
+                            <th>Order Date</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <form>
+                                <input id="order_ID" type="number" value="1">
+                                </form>
+                            </td>
+                            <td>
+                                <form>
+                                <input id="customer_id" type="text" value="id_01">
+                                </form>
+                            </td>
+                            <td>
+                                <form>
+                                <input id="order_date" type="date" value="2020-08-11">
+                                </form>
+                            </td>
+                            <td>
+                                <form>
+                                <button class="updateButton" id="updateButton">Update</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form>
+                                <button class="deleteButton" id="deleteButton">Delete</button>
+                                </form>
+                            </td>
+                        </tr>   
+                        <tr>
+                            <td>
+                                <form>
+                                <input id="order_ID" type="number" value="2">
+                                </form>
+                            </td>
+                            <td>
+                                <form>
+                                <input id="customer_id" type="text" value="id_02">
+                                </form>
+                            </td>
+                            <td>
+                                <form>
+                                <input id="order_date" type="date" value="2020-08-11">
+                                </form>
+                            </td>
+                            <td>
+                                <form>
+                                <button class="updateButton" id="updateButton">Update</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form>
+                                <button class="deleteButton" id="deleteButton">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> -->
+        </div>
+    </div>
+    <hr>
+    <div class="justify-content-center mt-3">
+        <fieldset>
+            <form method="POST" id="order" class="insertPurchaseOrder">
+                <div class="container"><h4><strong>Add a new order</strong></h4></div>
+                <div class="container newOrder">
+                    <div class="form-group">
+    
+                        <label for="customerID" class="align-center">Customer ID</label>
+                        <input type="text" name="customerID" id="customerID" placeholder="Enter just id number.">
+                        <br>
+                        <label for="orderDate" class="align-center">Order Date</label>
+                        <input type="text" class="form-control" id="orderDate" placeholder="Order Date Format: 2020-11-07" name="orderDate">   
+    
+                    </div>
+                    <div class="order">
+                        <button type="submit" data-align="center" class="btn btn-info mb-2" name="insertPurchaseOrder">Add Entry</button>
+                    </div>
+                </div>
+            </form>
+        </fieldset>
+    </div>
+    </body></html>
