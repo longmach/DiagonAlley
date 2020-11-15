@@ -129,7 +129,7 @@ def userCommunities():
 def purchaseOrder():
     db_connection = connect_to_database()
     if request.method == "GET":
-        getAllQuery = "SELECT * from items"
+        getAllQuery = "SELECT * from purchase_orders"
         result = execute_query(db_connection, getAllQuery).fetchall()
         return render_template("purchaseOrder.html", purchaseOrders = result)
     elif request.method == "POST" and "searchByPurchaseOrderID" in request.form:
@@ -151,7 +151,7 @@ def purchaseOrder():
 def purchaseOrderDetails():
     db_connection = connect_to_database()
     if request.method == "GET":
-        getAllQuery = "SELECT * from items"
+        getAllQuery = "SELECT * from purchase_order_details"
         result = execute_query(db_connection, getAllQuery).fetchall()
         return render_template("purchaseOrderDetails.html", purchaseOrderDetails = result)
     elif request.method == "POST" and "insertPurchaseOrder" in request.form:
