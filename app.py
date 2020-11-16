@@ -155,23 +155,27 @@ def purchaseOrderDetails():
 # TODO: create user communities html page, finish the queries below
 # format it the same way as the other pages
 # below is unfinished
-@app.route("/userCommunities", methods=["POST", "GET"])
-def userCommunities():
+@app.route("/customerCommunities", methods=["POST", "GET"])
+def customerCommunities():
     db_connection = connect_to_database()
     if request.method == "GET":
-        getAllQuery = "SELECT * from items"
+        getAllQuery = "SELECT * from user_communities"
         result = execute_query(db_connection, getAllQuery).fetchall()
-        return render_template("userCommunities.html", userCommunities = result)
+        return render_template("customerCommunities.html", customerCommunities = result)
     # fix queries below to exchange for real data
-    elif request.method == "POST" and "searchByUserCommunityName" in request.form:
-        userCommunityName = request.form['']
-        filteredSelectQuery = ""
-        result = execute_query(db_connection, filteredSelectQuery).fetchall()
-        return render_template("userCommunities.html", filteredCommunities = result)
-    elif request.method == "POST" and "insertUserCommunity" in request.form:
-        insertQuery = ""
-        result = execute_query(db_connection, insertQuery).fetchall()
-        return redirect(url_for("userCommunities"))
+    elif request.method == "POST" and "searchByCustomerID" in request.form:
+        customer_ID = request.form['customer_ID']
+        filteredSelectQuery = "SELECT * FROM user_communities WHERE customer_ID = %s;"
+        data = [customer_ID]
+        result = execute_query(db_connection, filteredSelectQuery, data).fetchall()
+        return render_template("customerCommunities.html", filteredCommunities=result)
+    elif request.method == "POST" and "insertNewCustomerCommunity" in request.form:
+        customer_ID = request.form["customer_ID"]
+        community_ID = request.form["community_ID"]
+        insertQuery = "INSERT INTO user_communities (customer_ID, community_ID) VALUES (%s, %s);"
+        data = [customer_ID, community_ID]
+        result = execute_query(db_connection, insertQuery, data).fetchall()
+        return redirect(url_for("customerCommunities"))
 
 # above is unfinished
 
