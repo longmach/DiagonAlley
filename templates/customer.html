@@ -30,6 +30,7 @@
         <h5 class="logo my-0 mr-md-auto font-weight-normal">Diagon Alley Logo</h5>
         <a class="py-1 d-none d-md-inline-block" href="customer">Customers</a>
         <a class="py-1 d-none d-md-inline-block" href="communities">Community</a>
+		<a class="py-1 d-none d-md-inline-block" href="customerCommunities">Customers-Communities</a>
         <a class="py-1 d-none d-md-inline-block" href="items">Items</a>
         <a class="py-1 d-none d-md-inline-block" href="purchaseOrder">Purchase Order</a>
         <a class="py-1 d-none d-md-inline-block" href="purchaseOrderDetails">Purchase Order Details</a>
@@ -37,13 +38,13 @@
     </nav>
     <h1 style="text-align: center">Diagon Alley</h1>
     <p style="text-align: center">
-        Employees of Diagon Valley can use this page to search details information regarding customers, to update and delete entries in customer table,and add entries to customer table. 
+        Employees of Diagon Valley can use this page to search details information regarding customers, to update and add entries to customer table. 
       </p>
     <div class="justify-content-center mt-3">
         <div class="container">
             <h3>All data for this table:</h3>
             <!-- <input type="submit" name="showAllCustomers" value="All Customers"/> -->
-            <table>
+            <table class="table">
                 <thead>
                     <th>Customer ID</th>
                     <th>Username</th>
@@ -63,7 +64,6 @@
                         <td>{{c[4]}}</td>
                         <td>{{c[5]}}</td>
                         <td>{{c[6]}}</td>
-                        <td>{{c[7]}}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -83,7 +83,7 @@
             <div id="resultsHere">
             <p id="searchResults">A table will be dynamically populated here as the results from the searches above. (similar format with below tables)</p>
             </div>
-            <table>
+            <table class="table">
                 <thead>
                     <th>Customer ID</th>
                     <th>First Name</th>
@@ -97,13 +97,12 @@
                     {% for c in filteredCustomer %}
                     <tr>
                         <td>{{c[0]}}</td>
-                        <td>{{c[1]}}</td>
-                        <td>{{c[2]}}</td>
-                        <td>{{c[3]}}</td>
                         <td>{{c[4]}}</td>
                         <td>{{c[5]}}</td>
+                        <td>{{c[3]}}</td>
+						<td>{{c[1]}}</td>
+                        <td>{{c[2]}}</td>
                         <td>{{c[6]}}</td>
-                        <td>{{c[7]}}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
