@@ -61,9 +61,9 @@
                 </tbody>
             </table>
             <hr>
-            <h3>Update User:</h3>
-            <div id="UpdateHere">
-            <p id="update">Delete an entry by filling out the fields below:</p>
+            <h3>Delete Entry:</h3>
+            <div id="deleteHere">
+            <p id="delete">Delete an entry by filling out the fields below:</p>
             </div>
             <table class="table">
                 <thead>
@@ -161,33 +161,23 @@
     <div class="justify-content-center mt-3">
       <!-- add items to order -->
         <fieldset>
-            <form method="POST" id="orderItems" class="insertPurchaseOrder">
+            <form method="POST" id="orderItems" class="insertPurchaseOrderDetails">
                 <div class="container"><h4><strong>Add items to an order</strong></h4></div>
                 <div class="container orderItems">
                     <div class="form-group">
 
                         <label for="orderID" class="align-center">Order ID</label>
-                        <input type="text" name="orderID" id="orderID" name="orderID" placeholder="Enter only id number.">
+                        <input type="text" name="orderID" id="orderID" placeholder="Enter only id number.">
 
                         <label for="username" class="align-center">Item to Add (by ID):</label>
-                        <input type="text" name="orderID" id="itemList" name="itemID" placeholder="Enter only id number.">
+                        <input type="text" name="itemID" id="itemList" placeholder="Enter only id number.">
                         
                         <label for="quantityOrdered" class="align-center">Quantity: </label>
-                        <select id="quantityOrdered" name="itemQuantity">
-                            <option value="amount_1">1</option>
-                            <option value="amount_2">2</option>
-                            <option value="amount_3">3</option>
-                            <option value="amount_4">4</option>
-                            <option value="amount_5">5</option>
-                            <option value="amount_6">6</option>
-                            <option value="amount_7">7</option>
-                            <option value="amount_8">8</option>
-                            <option value="amount_9">9</option>
-                        </select>
+                        <input type="text" name="quantity" id="itemList" placeholder="Enter only 1-9.">
                         <!-- might not be able to implement the below button this week  -->
                     </div>
                     <div class="order">
-                        <button type="submit" data-align="center" class="btn btn-info mb-2" name="insertPurchaseOrder">Add Entry</button>
+                        <button type="submit" data-align="center" class="btn btn-info mb-2" name="insertPurchaseOrderDetails">Add Entry</button>
                     </div>
                 </div>
             </form>

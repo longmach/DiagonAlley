@@ -50,7 +50,7 @@
                     <th>Community ID</th>
                 </thead>
                 <tbody>
-                    {% for c in customers %}
+                    {% for c in customerCommunities %}
                     <tr>
                         <td>{{c[0]}}</td>
                         <td>{{c[1]}}</td>
@@ -60,8 +60,8 @@
             </table>
 
 
-            <h3>Search for a Specific customer:</h3>
-            <form method="POST" id="filteredCustomerSearch">
+            <h3>Search for a Specific Community:</h3>
+            <form method="POST" id="filteredCommunitySearch">
             <label>Customer ID:</label>
             <input type="text" class = "searchByCustomerID" id="searchByCustomerID" name = "searchByCustomerID" required>
             <button class="submitButton" id="submitCustomerID" name = "searchByCustomerID">Submit</button>
@@ -78,7 +78,7 @@
                     <th>Community ID</th>
                 </thead>
                 <tbody>
-                    {% for c in filteredCustomer %}
+                    {% for c in filteredCommunities %}
                     <tr>
                         <td>{{c[0]}}</td>
                         <td>{{c[1]}}</td>
@@ -90,10 +90,10 @@
             <br>
     <hr>
     <div class="justify-content-center mt-3">
-        <!-- add new customer -->
+        <!-- add new community -->
         <fieldset>
-            <form method="POST" id="customer">
-                <div class="container"><h4><strong>Add a new customerCommunities</strong></h4></div>
+            <form method="POST" id="community">
+                <div class="container"><h4><strong>Add a new Customer Communities</strong></h4></div>
                 <div class="container newCustomerCommunities">
                     <div class="form-group">
                         <label for="username" class="align-center">Customer ID:</label>
