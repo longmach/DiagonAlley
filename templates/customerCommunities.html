@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customers</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/main.css')}}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+        <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark my-2 my-md-0 mr-md-3">
+        <h5 class="logo my-0 mr-md-auto font-weight-normal">Diagon Alley Logo</h5>
+        <a class="py-1 d-none d-md-inline-block" href="customer">Customers</a>
+        <a class="py-1 d-none d-md-inline-block" href="communities">Community</a>
+		<a class="py-1 d-none d-md-inline-block" href="customerCommunities">Customers-Communities</a>
+        <a class="py-1 d-none d-md-inline-block" href="items">Items</a>
+        <a class="py-1 d-none d-md-inline-block" href="purchaseOrder">Purchase Order</a>
+        <a class="py-1 d-none d-md-inline-block" href="purchaseOrderDetails">Purchase Order Details</a>
+
+    </nav>
+    <h1 style="text-align: center">Diagon Alley</h1>
+    <p style="text-align: center">
+        Employees of Diagon Valley can use this page to search details information regarding customers and their communities, and add entries to customerCommunities table. 
+      </p>
+    <div class="justify-content-center mt-3">
+        <div class="container">
+            <h3>All data for this table:</h3>
+            <!-- <input type="submit" name="showAllCustomers" value="All Customers"/> -->
+            <table class="table">
+                <thead>
+                    <th>Customer ID</th>
+                    <th>Community ID</th>
+                </thead>
+                <tbody>
+                    {% for c in customers %}
+                    <tr>
+                        <td>{{c[0]}}</td>
+                        <td>{{c[1]}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+
+            <h3>Search for a Specific customer:</h3>
+            <form method="POST" id="filteredCustomerSearch">
+            <label>Customer ID:</label>
+            <input type="text" class = "searchByCustomerID" id="searchByCustomerID" name = "searchByCustomerID" required>
+            <button class="submitButton" id="submitCustomerID" name = "searchByCustomerID">Submit</button>
+            </form>
+
+
+            <h3>Search Results Here:</h3>
+            <div id="resultsHere">
+            <p id="searchResults">A table will be dynamically populated here as the results from the searches above. (similar format with below tables)</p>
+            </div>
+            <table class="table">
+                <thead>
+                    <th>Customer ID</th>
+                    <th>Community ID</th>
+                </thead>
+                <tbody>
+                    {% for c in filteredCustomer %}
+                    <tr>
+                        <td>{{c[0]}}</td>
+                        <td>{{c[1]}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <br>
+            <br>
+    <hr>
+    <div class="justify-content-center mt-3">
+        <!-- add new customer -->
+        <fieldset>
+            <form method="POST" id="customer">
+                <div class="container"><h4><strong>Add a new customerCommunities</strong></h4></div>
+                <div class="container newCustomerCommunities">
+                    <div class="form-group">
+                        <label for="username" class="align-center">Customer ID:</label>
+                        <input type="text" class="form-control" id="customer_ID" placeholder="customer_ID" name="customer_ID">
+                        <label for="password" class="align-center">Community_ID:</label>
+                        <input type="text" class="form-control" id="Community_ID" placeholder="Community_ID" name="Community_ID">
+                    </div>
+                    <div class="wishListSubmit">
+                        <button type="submit" data-align="center" class="btn btn-info mb-2" name="insertNewCustomerCommunity">Add Entry</button>
+                    </div>
+                </div>
+            </form>
+        </fieldset>
+    </div>
+
+</body></html>

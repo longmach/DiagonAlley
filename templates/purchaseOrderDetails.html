@@ -30,6 +30,7 @@
         <h5 class="logo my-0 mr-md-auto font-weight-normal">Diagon Alley Logo</h5>
         <a class="py-1 d-none d-md-inline-block" href="customer">Customers</a>
         <a class="py-1 d-none d-md-inline-block" href="communities">Community</a>
+		<a class="py-1 d-none d-md-inline-block" href="customerCommunities">Customers-Communities</a>
         <a class="py-1 d-none d-md-inline-block" href="items">Items</a>
         <a class="py-1 d-none d-md-inline-block" href="purchaseOrder">Purchase Order</a>
         <a class="py-1 d-none d-md-inline-block" href="purchaseOrderDetails">Purchase Order Details</a>
@@ -43,7 +44,7 @@
         <div class="container">
             
             <h3> All data for this table:</h3>
-            <table>
+            <table class="table">
                 <thead>
                     <th>Order ID</th>
                     <th>Item ID</th>
@@ -62,9 +63,9 @@
             <hr>
             <h3>Update User:</h3>
             <div id="UpdateHere">
-            <p id="update">Update a customer entry by filling out the fields below:</p>
+            <p id="update">Delete an entry by filling out the fields below:</p>
             </div>
-            <table>
+            <table class="table">
                 <thead>
                     <th>Order ID</th>
                     <th>Item ID</th>
@@ -77,7 +78,7 @@
                             <td><input type="text" class="form-control" id="itemID" placeholder="Item ID" name="itemID"></td>
                             <td><input type="text" class="form-control" id="quantity" placeholder="quantity" name="quantity"></td>
                             <div class="container">
-                                <td><button type="submit" data-align="center" class="btn btn-info mb-2" name="deleteOrderItemRelationship">Update Entry</button></td>
+                                <td><button type="submit" data-align="center" class="btn btn-info mb-2" name="deleteOrderItemRelationship">Delete Entry</button></td>
                             </div>
                         </form>
                     </tr>
@@ -184,7 +185,6 @@
                             <option value="amount_9">9</option>
                         </select>
                         <!-- might not be able to implement the below button this week  -->
-                        <button class="btn btn-info mb-2"> Add another item</button>
                     </div>
                     <div class="order">
                         <button type="submit" data-align="center" class="btn btn-info mb-2" name="insertPurchaseOrder">Add Entry</button>
