@@ -74,9 +74,22 @@
                 <tbody>
                     <tr>
                         <form action="#" method="POST">
-                            <td><input type="text" class="form-control" id="orderID" placeholder="Order ID" name="orderID"></td>
-                            <td><input type="text" class="form-control" id="itemID" placeholder="Item ID" name="itemID"></td>
-                            <td><input type="text" class="form-control" id="quantity" placeholder="quantity" name="quantity"></td>
+                            <td>
+                                <select name="orderID" class="form-control" id="orderID">
+                                    {% for c in purchaseOrderDetails %}
+                                    <option value= "{{c[0]}}">{{c[0]}}</option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                            <td>
+                                <select name="itemID"  class="form-control" id="itemID">
+                                    {% for c in purchaseOrderDetails %}
+                                    <option value= "{{c[1]}}">{{c[1]}}</option>
+                                    {% endfor %}
+                                </select>
+                            </td>
+                            <!-- <td><input type="text" class="form-control" id="orderID" placeholder="Order ID" name="orderID"></td>
+                            <td><input type="text" class="form-control" id="itemID" placeholder="Item ID" name="itemID"></td> -->
                             <div class="container">
                                 <td><button type="submit" data-align="center" class="btn btn-info mb-2" name="deleteOrderItemRelationship">Delete Entry</button></td>
                             </div>
@@ -84,76 +97,6 @@
                     </tr>
                 </tbody>
             </table>
-<!-- 
-            <div id="showTable">
-                <p>
-                
-                Example table for Purchase Order Details
-                </p>
-                <table>
-                    <tbody>
-                        <tr>
-                            <th>Order ID</th>
-                            <th>Item ID</th>
-                            <th>Quantity</th>
-                        </tr>
-                        <tr>
-                            <td>
-                            <form>
-                                <input id="order_ID" type="number" value="1">
-                            </form>
-                            </td>
-                            <td>
-                            <form>
-                                <input id="item_ID" type="text" value="1">
-                            </form>
-                            </td>
-                            <td>
-                            <form>
-                                <input id="quantity" type="number" value="1">
-                            </form>
-                            </td>
-                            <td>
-                            <form>
-                                <button class="updateButton" id="updateButton">Update</button>
-                            </form>
-                            </td>
-                            <td>
-                            <form>
-                                <button class="deleteButton" id="deleteButton">Delete</button>
-                            </form>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                            <form>
-                                <input id="order_ID" type="number" value="2">
-                            </form>
-                            </td>
-                            <td>
-                            <form>
-                                <input id="item_name" type="text" value="2">
-                            </form>
-                            </td>
-                            <td>
-                            <form>
-                                <input id="quantity" type="number" value="3">
-                            </form>
-                            </td>
-                            <td>
-                            <form>
-                                <button class="updateButton" id="updateButton">Update</button>
-                            </form>
-                            </td>
-                            <td>
-                            <form>
-                                <button class="deleteButton" id="deleteButton">Delete</button>
-                            </form>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table> -->
-            <!-- </div> -->
         </div>
     </div>
       
@@ -167,13 +110,34 @@
                     <div class="form-group">
 
                         <label for="orderID" class="align-center">Order ID</label>
-                        <input type="text" name="orderID" id="orderID" placeholder="Enter only id number.">
+                        <!-- <input type="text" name="orderID" id="orderID" placeholder="Enter only id number."> -->
+                        <select name="orderID">
+                            {% for c in orderID %}
+                            <option value= "{{c[0]}}">{{c[0]}}</option>
+                            {% endfor %}
+                        </select>
 
                         <label for="username" class="align-center">Item to Add (by ID):</label>
-                        <input type="text" name="itemID" id="itemList" placeholder="Enter only id number.">
+                        <!-- <input type="text" name="itemID" id="itemList" placeholder="Enter only id number."> -->
+                        <select name="itemID">
+                            {% for c in itemID %}
+                            <option value= "{{c[0]}}">{{c[0]}}</option>
+                            {% endfor %}
+                        </select>
                         
                         <label for="quantityOrdered" class="align-center">Quantity: </label>
-                        <input type="text" name="quantity" id="itemList" placeholder="Enter only 1-9.">
+                        <!-- <input type="text" name="quantity" id="itemList" placeholder="Enter only 1-9."> -->
+                        <select name="quantity">
+                            <option value= "1">1</option>
+                            <option value= "2">2</option>
+                            <option value= "3">3</option>
+                            <option value= "4">4</option>
+                            <option value= "5">5</option>
+                            <option value= "6">6</option>
+                            <option value= "7">7</option>
+                            <option value= "8">8</option>
+                            <option value= "9">9</option>
+                        </select>
                         <!-- might not be able to implement the below button this week  -->
                     </div>
                     <div class="order">

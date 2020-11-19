@@ -1,5 +1,6 @@
 from flask import Flask, redirect, url_for, render_template, request
 from db_connector.db_connector import connect_to_database, execute_query
+from datetime import datetime
 # {% %} allows for native python code to be written
 # ex: {% for _ in range(10) %}
 ##      {% endfor %}
@@ -28,8 +29,6 @@ def customer():
     elif request.method == "POST" and "searchByCustomerFirstName" in request.form:
         f_name = request.form['searchByCustomerFirstName']
         l_name = request.form['searchByCustomerLastName']
-        # changed your single data select query by adding another input so now its one for first name and one for last name
-        # TODO: i changed the sql in a new file check it out. 
         filteredSelectQuery = "SELECT * FROM customers WHERE first_name = %s AND last_name = %s"
         data = (f_name, l_name)
         result = execute_query(db_connection, filteredSelectQuery, data).fetchall()
@@ -71,8 +70,6 @@ def items():
         return render_template("items.html", items = result)
     elif request.method == "POST" and "searchByItemName" in request.form:
         item_name = request.form['itemName']
-        # I added item_ID to html so we can just do * now
-        # TODO: make this change in sql file or we can just use the one i created 
         filteredSelectQuery = "SELECT * FROM items WHERE name = %s"
         data = [item_name]
         result = execute_query(db_connection, filteredSelectQuery, data).fetchall()
@@ -112,19 +109,25 @@ def communities():
 @app.route("/purchaseOrder", methods=["POST", "GET"])
 def purchaseOrder():
     db_connection = connect_to_database()
+    getAllQuery = "SELECT * from purchase_orders"
+    getCustomerIDQuery ="SELECT customers.customer_ID from customers"
+    orderIDQuery = "SELECT purchase_orders.order_ID from purchase_orders"
     if request.method == "GET":
-        getAllQuery = "SELECT * from purchase_orders"
+        orderIDResults = execute_query(db_connection, orderIDQuery).fetchall()
+        customerIDresult = execute_query(db_connection, getCustomerIDQuery).fetchall()
         result = execute_query(db_connection, getAllQuery).fetchall()
-        return render_template("purchaseOrder.html", purchaseOrders = result)
+        return render_template("purchaseOrder.html", purchaseOrders = result, customerID = customerIDresult, orderID = orderIDResults)
     elif request.method == "POST" and "searchByPurchaseOrderID" in request.form:
         order_ID = request.form['purchaseOrderID']
         filteredSelectQuery = "SELECT * FROM purchase_orders WHERE order_ID = %s;"
         data = [order_ID]
+        orderIDResults = execute_query(db_connection, orderIDQuery).fetchall()
+        customerIDresult = execute_query(db_connection, getCustomerIDQuery).fetchall()
         result = execute_query(db_connection, filteredSelectQuery,data).fetchall()
-        return render_template("purchaseOrder.html", filteredPurchaseOrder = result)
+        return render_template("purchaseOrder.html", filteredPurchaseOrder = result, customerID = customerIDresult, orderID = orderIDResults)
     elif request.method == "POST" and "insertPurchaseOrder" in request.form:
         customerID = request.form['customerID']
-        order_date = request.form['orderDate']
+        order_date = datetime.date(datetime.now())
         insertQuery = "INSERT INTO purchase_orders (customer_ID, order_date) VALUES (%s, %s);"
         data = (customerID, order_date)
         result = execute_query(db_connection, insertQuery,data).fetchall()
@@ -136,8 +139,12 @@ def purchaseOrderDetails():
     db_connection = connect_to_database()
     if request.method == "GET":
         getAllQuery = "SELECT * from purchase_order_details"
+        orderIDQuery = "SELECT purchase_orders.order_ID from purchase_orders"
+        itemIDQuery = "SELECT items.item_ID from items" 
         result = execute_query(db_connection, getAllQuery).fetchall()
-        return render_template("purchaseOrderDetails.html", purchaseOrderDetails = result)
+        orderIDResults = execute_query(db_connection, orderIDQuery).fetchall()
+        itemIDResults = execute_query(db_connection, itemIDQuery).fetchall()
+        return render_template("purchaseOrderDetails.html", purchaseOrderDetails = result, orderID = orderIDResults, itemID = itemIDResults)
     elif request.method == "POST" and "insertPurchaseOrderDetails" in request.form:
         orderID = request.form['orderID']
         itemID = request.form['itemID']
@@ -162,9 +169,13 @@ def purchaseOrderDetails():
 def customerCommunities():
     db_connection = connect_to_database()
     if request.method == "GET":
-        getAllQuery = "SELECT * FROM user_communities"
-        result = execute_query(db_connection, getAllQuery).fetchall()
-        return render_template("customerCommunities.html", customerCommunities = result)
+        getAllQueryCustomerCommunities = "SELECT * FROM user_communities"
+        getCustomerID = "SELECT user_communities.customer_ID from user_communities"
+        getCommunityID = "SELECT communities.community_ID from communities"
+        result = execute_query(db_connection, getAllQueryCustomerCommunities).fetchall()
+        customerIDresult = execute_query(db_connection, getCustomerID).fetchall()
+        communityIDresult = execute_query(db_connection, getCommunityID).fetchall()
+        return render_template("customerCommunities.html", customerCommunities = result, customersID =customerIDresult, communitiesID = communityIDresult)
     # dude where was your filteredCommunities and customerCommunities in your html. it cant render unless you do this. 
     elif request.method == "POST" and "searchByCustomerID" in request.form:
         # has to be the same name as the form input...

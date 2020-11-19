@@ -60,10 +60,15 @@
             </table>
 
 
-            <h3>Search for a Specific Community:</h3>
+            <h3>Search for a Specific Customer-Community Relationship:</h3>
             <form method="POST" id="filteredCommunitySearch">
             <label>Customer ID:</label>
-            <input type="text" class = "searchByCustomerID" id="searchByCustomerID" name = "searchByCustomerID" required>
+            <!-- <input type="text" class = "searchByCustomerID" id="searchByCustomerID" name = "searchByCustomerID" required> -->
+            <select name="searchByCustomerID"  class = "searchByCustomerID" id="searchByCustomerID">
+                {% for c in customersID %}
+                <option value= "{{c[0]}}">{{c[0]}}</option>
+                {% endfor %}
+            </select>
             <button class="submitButton" id="submitCustomerID" name = "searchByCustomerID">Submit</button>
             </form>
 
@@ -98,22 +103,18 @@
                     <div class="form-group">
                         <label for="username" class="align-center">Customer ID:</label>
                         <!-- <input type="text" class="form-control" id="customer_ID" placeholder="customer_ID" name="customer_ID"/> -->
-                        <input type="text">
-                            <select name="customer_ID">
-                                {% for c in customerCommunities %}
-                                <option value= "{{c[0]}}">{{c[0]}}</option>"
-                                {% endfor %}
-                            </select>
-                        </input>
+                        <select name="customer_ID">
+                            {% for c in customersID %}
+                            <option value= "{{c[0]}}">{{c[0]}}</option>
+                            {% endfor %}
+                        </select>
                         <label for="password" class="align-center">Community_ID:</label>
                         <!-- <input type="text" class="form-control" id="Community_ID" placeholder="Community_ID" name="Community_ID"> -->
-                        <input type="text">
-                            <select name= "Community_ID">
-                                {% for c in customerCommunities %}
-                                <option value= "{{c[1]}}">{{c[1]}}</option>"
-                                {% endfor %}
-                            </select>
-                        </input>
+                        <select name= "Community_ID">
+                            {% for c in communitiesID %}
+                            <option value= "{{c[0]}}">{{c[0]}}</option>
+                            {% endfor %}
+                        </select>
                     </div>
                     <div class="wishListSubmit">
                         <button type="submit" data-align="center" class="btn btn-info mb-2" name="insertNewCustomerCommunity">Add Entry</button>
