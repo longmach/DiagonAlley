@@ -127,6 +127,7 @@ def purchaseOrder():
         return render_template("purchaseOrder.html", filteredPurchaseOrder = result, customerID = customerIDresult, orderID = orderIDResults)
     elif request.method == "POST" and "insertPurchaseOrder" in request.form:
         customerID = request.form['customerID']
+        # use this for created date for user
         order_date = datetime.date(datetime.now())
         insertQuery = "INSERT INTO purchase_orders (customer_ID, order_date) VALUES (%s, %s);"
         data = (customerID, order_date)
@@ -149,7 +150,6 @@ def purchaseOrderDetails():
         orderID = request.form['orderID']
         itemID = request.form['itemID']
         item_quantity = request.form['quantity']
-        print(orderID, itemID, item_quantity)
         insertQuery = "INSERT INTO purchase_order_details (oid, iid, quantity_ordered) VALUES (%s, %s, %s);"
         data = (orderID, itemID, item_quantity)
         result = execute_query(db_connection, insertQuery, data).fetchall()
