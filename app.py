@@ -54,6 +54,7 @@ def customer():
         email = request.form['email']
         username = request.form['username']
         password = request.form['password']
+        #add created date automatically
         created_date = datetime.date(datetime.now()) 
         # took out convert(date, getdate()) but feel free to fit it in there if you can get it to work
         insertQuery = "INSERT INTO customers (first_name, last_name, email, username, password, created_date) VALUES (%s, %s, %s, %s, %s, %s);"
