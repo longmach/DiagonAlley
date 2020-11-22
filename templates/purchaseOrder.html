@@ -97,6 +97,43 @@
         </div>
     </div>
     <hr>
+    <div id="UpdateHere" class="container justify-content-center mt-3">
+        <p id="update">Update a purchase order entry by filling out the fields below:</p>
+        <table>
+            <thead>
+                <th>Order ID</th>
+                <th>Customer ID</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <form action="#" method="POST">
+                        <td>
+                            <label>Purchase Order Number:</label>
+                            <select  name="order_ID" id="order_ID" >
+                                {% for c in orderID %}
+                                <option value= "{{c[0]}}">{{c[0]}}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td>
+                            <label for="customer_ID" class="align-center">Customer ID</label>
+                            
+                            <select  name="customer_ID" id="customer_ID" >
+                                <option value="NULL">NULL</option>
+                                {% for c in customerID %}
+                                <option value= "{{c[0]}}">{{c[0]}}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <div class="container">
+                            <td><button type="submit" data-align="center" class="btn btn-info mb-2" name="updatePurchaseOrder">Update Entry</button></td>
+                        </div>
+                    </form>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr>
     <div class="justify-content-center mt-3">
         <fieldset>
             <form method="POST" id="order" class="insertPurchaseOrder">
@@ -107,7 +144,6 @@
                         <label for="customerID" class="align-center">Customer ID</label>
                         <!-- <input type="text" name="customerID" id="customerID" placeholder="Enter just id number."> -->
                         <select  name="customerID" id="customerID" >
-			    <option value="NULL">NULL</option>
                             {% for c in customerID %}
                             <option value= "{{c[0]}}">{{c[0]}}</option>
                             {% endfor %}

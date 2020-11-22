@@ -113,6 +113,8 @@ def purchaseOrder():
     getAllQuery = "SELECT * from purchase_orders"
     getCustomerIDQuery ="SELECT customers.customer_ID from customers"
     orderIDQuery = "SELECT purchase_orders.order_ID from purchase_orders"
+     # use this for created date for user
+    order_date = datetime.date(datetime.now())
     if request.method == "GET":
         orderIDResults = execute_query(db_connection, orderIDQuery).fetchall()
         customerIDresult = execute_query(db_connection, getCustomerIDQuery).fetchall()
@@ -126,10 +128,18 @@ def purchaseOrder():
         customerIDresult = execute_query(db_connection, getCustomerIDQuery).fetchall()
         result = execute_query(db_connection, filteredSelectQuery,data).fetchall()
         return render_template("purchaseOrder.html", filteredPurchaseOrder = result, customerID = customerIDresult, orderID = orderIDResults)
+        # update 1:M rel to be nullable
+    elif request.method == "POST" and "updatePurchaseOrder" in request.form:
+        order_ID = request.form["order_ID"]
+        customer_ID = request.form["customer_ID"]
+        if customer_ID == "NULL":
+            customer_ID = None 
+        updateQuery= "UPDATE purchase_orders SET customer_ID = %s, order_date = %s WHERE order_ID = %s;"
+        data = (customer_ID, order_date, order_ID)
+        result = execute_query(db_connection, updateQuery, data).fetchall()
+        return redirect(url_for("purchaseOrder"))
     elif request.method == "POST" and "insertPurchaseOrder" in request.form:
         customerID = request.form['customerID']
-        # use this for created date for user
-        order_date = datetime.date(datetime.now())
         insertQuery = "INSERT INTO purchase_orders (customer_ID, order_date) VALUES (%s, %s);"
         data = (customerID, order_date)
         result = execute_query(db_connection, insertQuery,data).fetchall()
@@ -171,7 +181,7 @@ def customerCommunities():
     db_connection = connect_to_database()
     if request.method == "GET":
         getAllQueryCustomerCommunities = "SELECT * FROM user_communities"
-        getCustomerID = "SELECT user_communities.customer_ID from user_communities"
+        getCustomerID = "SELECT customers.customer_ID from customers"
         getCommunityID = "SELECT communities.community_ID from communities"
         result = execute_query(db_connection, getAllQueryCustomerCommunities).fetchall()
         customerIDresult = execute_query(db_connection, getCustomerID).fetchall()
