@@ -107,6 +107,7 @@
                         <label for="customerID" class="align-center">Customer ID</label>
                         <!-- <input type="text" name="customerID" id="customerID" placeholder="Enter just id number."> -->
                         <select  name="customerID" id="customerID" >
+			    <option value="NULL">NULL</option>
                             {% for c in customerID %}
                             <option value= "{{c[0]}}">{{c[0]}}</option>
                             {% endfor %}
