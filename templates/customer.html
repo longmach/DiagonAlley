@@ -126,13 +126,18 @@
                 <tbody>
                     <tr>
                         <form action="#" method="POST">
-                            <td><input type="text" class="form-control" id="firstName" placeholder="customer id" name="customer_ID"></td>
+                            <td>
+                                <select  name="customer_ID" id="customer_ID" >
+                                    {% for c in customerIDres %}
+                                    <option value= "{{c[0]}}">{{c[0]}}</option>
+                                    {% endfor %}
+                                </select>
+                            </td>
                             <td><input type="text" class="form-control" id="firstName" placeholder="first name" name="first_name"></td>
                             <td><input type="text" class="form-control" id="lastName" placeholder="last name" name="last_name"></td>
                             <td><input type="text" class="form-control" id="email" placeholder="email" name="email"></td>
                             <td><input type="text" class="form-control" id="username" placeholder="Username" name="username"></td>
                             <td><input type="text" class="form-control" id="password" placeholder="Password" name="password"></td>
-                            <td><input type="text" class="form-control" id="createdDate" placeholder="2020-11-07" name="createDateUser"> </td>
                             <div class="container">
                                 <td><button type="submit" data-align="center" class="btn btn-info mb-2" name="updateCustomer">Update Entry</button></td>
                             </div>

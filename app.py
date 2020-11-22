@@ -18,21 +18,22 @@ def home():
 # customer
 @app.route("/customer", methods=["POST", "GET"])
 def customer():
-    # thought process: 
-    # have the customer table show up every time the page is GET requested to reflect changes made
-    # redirect after update/delete/insert to show changed in DB
+    getCustomerIDQuery ="SELECT customers.customer_ID from customers"
+    created_date = datetime.date(datetime.now())
     db_connection = connect_to_database()
     if request.method == "GET":
         getAllQuery = "SELECT * from customers"
         result = execute_query(db_connection, getAllQuery).fetchall()
-        return render_template("customer.html", customers = result)
-    elif request.method == "POST" and "searchByCustomerFirstName" in request.form:
+        customerIDres = execute_query(db_connection, getAllQuery).fetchall()
+        return render_template("customer.html", customers = result, customerIDres= customerIDres)
+    elif request.method == "POST" and "searchByCustomerFirstName" in request.form: 
         f_name = request.form['searchByCustomerFirstName']
         l_name = request.form['searchByCustomerLastName']
         filteredSelectQuery = "SELECT * FROM customers WHERE first_name = %s AND last_name = %s"
         data = (f_name, l_name)
         result = execute_query(db_connection, filteredSelectQuery, data).fetchall()
-        return render_template("customer.html", filteredCustomer = result)
+        customerIDres = execute_query(db_connection, getAllQuery).fetchall()
+        return render_template("customer.html", filteredCustomer = result, customerIDres= customerIDres)
     # update works finally 
     elif request.method == "POST" and "updateCustomer" in request.form:
         cid = request.form["customer_ID"]
@@ -41,7 +42,6 @@ def customer():
         email = request.form['email']
         username = request.form['username']
         password = request.form['password']
-        created_date = request.form['createDateUser']
         updateQuery= "UPDATE customers SET first_name = %s, last_name = %s, email = %s, username = %s, password = %s, created_date = %s WHERE customer_ID = %s;"
         data = (f_name, l_name, email, username, password, created_date, cid)
         result = execute_query(db_connection, updateQuery, data).fetchall()
@@ -54,9 +54,6 @@ def customer():
         email = request.form['email']
         username = request.form['username']
         password = request.form['password']
-        #add created date automatically
-        created_date = datetime.date(datetime.now()) 
-        # took out convert(date, getdate()) but feel free to fit it in there if you can get it to work
         insertQuery = "INSERT INTO customers (first_name, last_name, email, username, password, created_date) VALUES (%s, %s, %s, %s, %s, %s);"
         data = (f_name, l_name, email, username, password, created_date)
         result = execute_query(db_connection, insertQuery, data).fetchall()
