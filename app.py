@@ -24,7 +24,7 @@ def customer():
     if request.method == "GET":
         getAllQuery = "SELECT * from customers"
         result = execute_query(db_connection, getAllQuery).fetchall()
-        customerIDres = execute_query(db_connection, getAllQuery).fetchall()
+        customerIDres = execute_query(db_connection, getCustomerIDQuery).fetchall()
         return render_template("customer.html", customers = result, customerIDres= customerIDres)
     elif request.method == "POST" and "searchByCustomerFirstName" in request.form: 
         f_name = request.form['searchByCustomerFirstName']
@@ -32,7 +32,7 @@ def customer():
         filteredSelectQuery = "SELECT * FROM customers WHERE first_name = %s AND last_name = %s"
         data = (f_name, l_name)
         result = execute_query(db_connection, filteredSelectQuery, data).fetchall()
-        customerIDres = execute_query(db_connection, getAllQuery).fetchall()
+        customerIDres = execute_query(db_connection, getCustomerIDQuery).fetchall()
         return render_template("customer.html", filteredCustomer = result, customerIDres= customerIDres)
     # update works finally 
     elif request.method == "POST" and "updateCustomer" in request.form:
