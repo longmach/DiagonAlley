@@ -139,7 +139,7 @@ def purchaseOrder():
         result = execute_query(db_connection, updateQuery, data).fetchall()
         return redirect(url_for("purchaseOrder"))
     elif request.method == "POST" and "insertPurchaseOrder" in request.form:
-        customerID = request.form['customerID']
+        customer_ID = request.form["customer_ID"]
         insertQuery = "INSERT INTO purchase_orders (customer_ID, order_date) VALUES (%s, %s);"
         data = (customerID, order_date)
         result = execute_query(db_connection, insertQuery,data).fetchall()
