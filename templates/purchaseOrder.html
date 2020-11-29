@@ -144,7 +144,7 @@
                         <label for="customerID" class="align-center">Customer ID</label>
                         <select  name="customerID" id="customerID" >
                             {% for c in customerID %}
-                            <option value= "{{c[0]}}">{{c[0]}}</option>
+                            <option value= "{{c[0]}}" name="customerID" >{{c[0]}}</option>
                             {% endfor %}
                         </select>
                         <br>
