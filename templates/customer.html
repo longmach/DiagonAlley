@@ -73,8 +73,8 @@
             <h3>Search for a Specific customer:</h3>
             <form method="POST" id="filteredCustomerSearch">
             <label>Customer Name:</label>
-            <input type="text" class = "searchByCustomerFirstName" id="searchByCustomerName" name = "searchByCustomerFirstName" required>
-            <input type="text" class = "searchByCustomerLastName" id="searchByCustomerName" name = "searchByCustomerLastName" required>
+            <input type="text" class = "searchByCustomerFirstName" id="searchByCustomerName" name = "searchByCustomerFirstName" placeholder="first name" required>
+            <input type="text" class = "searchByCustomerLastName" id="searchByCustomerName" name = "searchByCustomerLastName" placeholder="last name" required>
             <button class="submitButton" id="submitCustomerName" name = "searchByCustomerName">Submit</button>
             </form>
 
@@ -121,7 +121,7 @@
                     <th>Email</th>
                     <th>Username</th>
                     <th>Password</th>
-                    <th>Created Date</th>
+                    <!--<th>Created Date</th>-->
                 </thead>
                 <tbody>
                     <tr>
@@ -157,15 +157,15 @@
                 <div class="container newCustomer">
                     <div class="form-group">
                         <label for="username" class="align-center">Username:</label>
-                        <input type="text" class="form-control" id="username" placeholder="Username" name="username">
+                        <input type="text" class="form-control" id="username" placeholder="Username" name="username" required>
                         <label for="password" class="align-center">Password:</label>
-                        <input type="text" class="form-control" id="password" placeholder="Password" name="password">
+                        <input type="text" class="form-control" id="password" placeholder="Password" name="password" required>
                         <label for="username" class="align-center">Email:</label>
-                        <input type="text" class="form-control" id="email" placeholder="email" name="email">
+                        <input type="text" class="form-control" id="email" placeholder="email" name="email" required>
                         <label for="username" class="align-center">First Name:</label>
-                        <input type="text" class="form-control" id="firstName" placeholder="first name" name="first_name">
+                        <input type="text" class="form-control" id="firstName" placeholder="first name" name="first_name" required>
                         <label for="username" class="align-center">Last Name: </label>
-                        <input type="text" class="form-control" id="lastName" placeholder="last name" name="last_name">
+                        <input type="text" class="form-control" id="lastName" placeholder="last name" name="last_name" required>
                     </div>
                     <div class="wishListSubmit">
                         <button type="submit" data-align="center" class="btn btn-info mb-2" name="addCustomer">Add Entry</button>
