@@ -5,7 +5,7 @@
 
 
 -- get a single data for the search form
-SELECT * FROM customers WHERE first_name = :last_name_from_customer_page AND last_name = :first_name_from_customer_page;	-- customer page
+SELECT * FROM customers WHERE first_name = :first_name_from_customer_page AND last_name = :last_name_from_customer_page;	-- customer page
 SELECT * WHERE name = :name_from_community_page;																			-- communities page
 SELECT * FROM items WHERE name = :name_from_items_page;																-- item page
 SELECT * FROM purchase_orders WHERE order_ID = :order_ID_from_purchase_order_page;										-- purchase_orders page
