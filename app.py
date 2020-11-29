@@ -42,9 +42,10 @@ def customer():
         email = request.form['email']
         username = request.form['username']
         password = request.form['password']
-        updateQuery= "UPDATE customers SET first_name = %s, last_name = %s, email = %s, username = %s, password = %s, created_date = %s WHERE customer_ID = %s;"
-        data = (f_name, l_name, email, username, password, created_date, cid)
-        result = execute_query(db_connection, updateQuery, data).fetchall()
+        if cid and f_name and l_name and email and username and password:  
+            updateQuery= "UPDATE customers SET first_name = %s, last_name = %s, email = %s, username = %s, password = %s, created_date = %s WHERE customer_ID = %s;"
+            data = (f_name, l_name, email, username, password, created_date, cid)
+            result = execute_query(db_connection, updateQuery, data).fetchall()
         return redirect(url_for("customer"))
 
     elif request.method == "POST" and "addCustomer" in request.form:
