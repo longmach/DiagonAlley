@@ -63,14 +63,16 @@
                     {% endfor %}
                 </tbody>
             </table>
+            <hr>
             <h3>Search by Item:</h3>
             <!-- add form name, post, add name to input and button -->
+            <p>Please format your search term with letters from the alphabet only.</p>
             <form method="POST" class="searchByItemName">
                 <label>Item Name:</label>
-                <input type="text" id="searchByItem" name="itemName">
+                <input type="text" id="searchByItem" name="itemName" required pattern="[a-zA-Z]+">
                 <button class="submitButton" id="submitItemName" name = "searchByItemName">Submit</button>
             </form>
-
+            <hr>
 
             <h3>Search Results:</h3>
             <div id="resultsHere">
@@ -100,93 +102,6 @@
                     {% endfor %}
                 </tbody>
             </table>
-            <!-- <br>
-            <br>
-
-            <div id="showTable">
-                <p>
-                    A table will be dynamically populated here as the results after the employee click one of the button above.
-                </p>
-        
-                <div id="showTable">
-                <p>
-                Example table for Items
-                </p>
-                <table>
-                    <tbody>
-                        <tr>
-                            <th>Name</th>
-                            <th>Available Quantity</th>
-                            <th>Cost</th>
-                            <th>Selling Price</th>
-                        </tr>
-                        <tr>
-                            <td>
-                                <form>
-                                <input id="item_name" type="text" value="Snowy Owl">
-                                </form>
-                            </td>
-                            <td>
-                                <form>
-                                <input id="avail_quant" type="number" value="10">
-                                </form>
-                            </td>
-                            <td>
-                                <form>
-                                <input id="cost" type="number" value="15">
-                                </form>
-                            </td>
-                            <td>
-                                <form>
-                                <input id="price" type="number" value="45">
-                                </form>
-                            </td>
-                            <td>
-                                <form>
-                                <button class="updateButton" id="updateButton">Update</button>
-                                </form>
-                            </td>
-                            <td>
-                                <form>
-                                <button class="deleteButton" id="deleteButton">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <form>
-                                <input id="item_name" type="text" value="The Firebolt Broomstick">
-                                </form>
-                            </td>
-                            <td>
-                                <form>
-                                <input id="avail_quant" type="number" value="2">
-                                </form>
-                            </td>
-                            <td>
-                                <form>
-                                <input id="cost" type="number" value="200">
-                                </form>
-                            </td>
-                            <td>
-                                <form>
-                                <input id="price" type="number" value="1000">
-                                </form>
-                            </td>
-                            <td>
-                                <form>
-                                <button class="updateButton" id="updateButton">Update</button>
-                                </form>
-                            </td>
-                            <td>
-                                <form>
-                                <button class="deleteButton" id="deleteButton">Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div> -->
         </div>
     </div>
     <hr>
@@ -200,16 +115,16 @@
                     <div class="form-group">
     
                         <label for="itemName" class="align-center">New item:</label>
-                        <input type="text" class="form-control" id="itemName" placeholder="item name" name="itemName">
+                        <input type="text" class="form-control" id="itemName" placeholder="item name" name="itemName" required>
     
                         <label for="quantity" class="align-center">Quantity Available:</label>
-                        <input type="text" class="form-control" id="itemQuantity" placeholder="item quantity" name="itemQuantity">
+                        <input type="text" class="form-control" id="itemQuantity" placeholder="item quantity" name="itemQuantity" required>
     
                         <label for="itemCost" class="align-center">Item Cost:</label>
-                        <input type="text" class="form-control" id="itemCost" placeholder="item cost" name="itemCost">
+                        <input type="text" class="form-control" id="itemCost" placeholder="item cost" name="itemCost" required>
     
                         <label for="itemSellPrice" class="align-center">Item Sell Price:</label>
-                        <input type="text" class="form-control" id="itemSellPrice" placeholder="item sell price" name="itemPrice">
+                        <input type="text" class="form-control" id="itemSellPrice" placeholder="item sell price" name="itemPrice" required>
                     </div>
                     <div class="order">
                         <button type="submit" data-align="center" class="btn btn-info mb-2" name="insertItem">Add Entry</button>

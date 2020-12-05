@@ -73,8 +73,8 @@
             <h3>Search for a Specific customer:</h3>
             <form method="POST" id="filteredCustomerSearch">
             <label>Customer Name:</label>
-            <input type="text" class = "searchByCustomerFirstName" id="searchByCustomerName" name = "searchByCustomerFirstName" placeholder="first name" required>
-            <input type="text" class = "searchByCustomerLastName" id="searchByCustomerName" name = "searchByCustomerLastName" placeholder="last name" required>
+            <input type="text" class = "searchByCustomerFirstName" id="searchByCustomerName" name = "searchByCustomerFirstName" placeholder="first name" required pattern="[a-zA-Z]+" minlength="1">
+            <input type="text" class = "searchByCustomerLastName" id="searchByCustomerName" name = "searchByCustomerLastName" placeholder="last name" required pattern="[a-zA-Z0-9]+" minlength="1">
             <button class="submitButton" id="submitCustomerName" name = "searchByCustomerName">Submit</button>
             </form>
 
@@ -112,7 +112,6 @@
             <h3>Update User:</h3>
             <div id="UpdateHere">
             <p id="update">Update a customer entry by filling out the fields below:</p>
-            <p>*IMPORTANT: If any of the entry boxes are empty, the update will not occur and you will be redirected to this page again*</p>
             </div>
             <table>
                 <thead>
@@ -122,7 +121,6 @@
                     <th>Email</th>
                     <th>Username</th>
                     <th>Password</th>
-                    <!--<th>Created Date</th>-->
                 </thead>
                 <tbody>
                     <tr>
@@ -134,11 +132,11 @@
                                     {% endfor %}
                                 </select>
                             </td>
-                            <td><input type="text" class="form-control" id="firstName" placeholder="first name" name="first_name"></td>
-                            <td><input type="text" class="form-control" id="lastName" placeholder="last name" name="last_name"></td>
-                            <td><input type="text" class="form-control" id="email" placeholder="email" name="email"></td>
-                            <td><input type="text" class="form-control" id="username" placeholder="Username" name="username"></td>
-                            <td><input type="text" class="form-control" id="password" placeholder="Password" name="password"></td>
+                            <td><input type="text" class="form-control" id="firstName" placeholder="first name" name="first_name" required minlength="1"></td>
+                            <td><input type="text" class="form-control" id="lastName" placeholder="last name" name="last_name" required minlength="1"></td>
+                            <td><input type="text" class="form-control" id="email" placeholder="email" name="email" required></td>
+                            <td><input type="text" class="form-control" id="username" placeholder="Username" name="username" required></td>
+                            <td><input type="text" class="form-control" id="password" placeholder="Password" name="password" required></td>
                             <div class="container">
                                 <td><button type="submit" data-align="center" class="btn btn-info mb-2" name="updateCustomer">Update Entry</button></td>
                             </div>
@@ -172,7 +170,7 @@
                         <button type="submit" data-align="center" class="btn btn-info mb-2" name="addCustomer">Add Entry</button>
                     </div>
                     <p>
-                        If you don't see the community you'd like to see, please add the community in the <a href="community">Add Community</a> section.
+                        If you don't see the community you'd like to see, please add the community in the <a href="communities">Add Community</a> section.
                     </p>
                 </div>
             </form>

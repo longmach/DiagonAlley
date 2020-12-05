@@ -65,7 +65,7 @@
             <!-- add form name, post, add name to input and button -->
             <form method="POST" class="searchByCommunity">
             <label>Community Name:</label>
-            <input type="text" id="searchByCommunity" name="communityName">
+            <input type="text" id="searchByCommunity" name="communityName" required pattern="[a-zA-Z0-9]+">
             <button class="submitButton" id="submitCommunityName" name="searchByCommunity">Submit</button>
             </form>
 
@@ -96,65 +96,6 @@
                 <p>
                     A table will be dynamically populated here as the results after the employee click one of the button above.
                 </p>
-            
-                <!-- <div id="showTable">
-                    <p>
-                    
-                    Example table for Community
-                    </p>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <th>Community Name</th>
-                                <th>Discount</th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <form>
-                                    <input id="name" type="text" value="Slytherin">
-                                    </form>
-                                </td>
-                                <td>
-                                    <form>
-                                    <input id="discount (%)" type="number" value="-10">
-                                    </form>
-                                </td>
-                                <td>
-                                    <form>
-                                    <button class="updateButton" id="updateButton">Update</button>
-                                    </form>
-                                </td>
-                                <td>
-                                    <form>
-                                    <button class="deleteButton" id="deleteButton">Delete</button>
-                                    </form>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <form>
-                                    <input id="name" type="text" value="Gryffindor">
-                                    </form>
-                                </td>
-                                <td>
-                                    <form>
-                                    <input id="discount (%)" type="number" value="0">
-                                    </form>
-                                </td>
-                                <td>
-                                    <form>
-                                    <button class="updateButton" id="updateButton">Update</button>
-                                    </form>
-                                </td>
-                                <td>
-                                    <form>
-                                    <button class="deleteButton" id="deleteButton">Delete</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div> -->
             </div>
         </div>
     </div>
