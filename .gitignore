@@ -1,1 +1,3 @@
+*.py~
+
 db_credentials.py
