@@ -1,11 +1,6 @@
 from flask import Flask, redirect, url_for, render_template, request
 from db_connector.db_connector import connect_to_database, execute_query
-from datetime import datetime
-# {% %} allows for native python code to be written
-# ex: {% for _ in range(10) %}
-##      {% endfor %}
-# {{ }} allows for any variable to be sent from backend to front end
-
+from datetime import datetime 
 app = Flask(__name__)
 # index
 @app.route("/")
@@ -21,11 +16,13 @@ def customer():
     getCustomerIDQuery ="SELECT customers.customer_ID from customers"
     created_date = datetime.date(datetime.now())
     db_connection = connect_to_database()
+    # get request to show everything in table
     if request.method == "GET":
         getAllQuery = "SELECT * from customers"
         result = execute_query(db_connection, getAllQuery).fetchall()
         customerIDres = execute_query(db_connection, getCustomerIDQuery).fetchall()
         return render_template("customer.html", customers = result, customerIDres= customerIDres)
+    # search by first name and last name
     elif request.method == "POST" and "searchByCustomerFirstName" in request.form: 
         f_name = request.form['searchByCustomerFirstName']
         l_name = request.form['searchByCustomerLastName']
@@ -34,7 +31,7 @@ def customer():
         result = execute_query(db_connection, filteredSelectQuery, data).fetchall()
         customerIDres = execute_query(db_connection, getCustomerIDQuery).fetchall()
         return render_template("customer.html", filteredCustomer = result, customerIDres= customerIDres)
-    # update works finally 
+    # update customer
     elif request.method == "POST" and "updateCustomer" in request.form:
         cid = request.form["customer_ID"]
         f_name = request.form['first_name']
@@ -47,9 +44,8 @@ def customer():
             data = (f_name, l_name, email, username, password, created_date, cid)
             result = execute_query(db_connection, updateQuery, data).fetchall()
         return redirect(url_for("customer"))
-
+    # insert customer
     elif request.method == "POST" and "addCustomer" in request.form:
-        # create variables with values to insert from request.form
         f_name = request.form['first_name']
         l_name = request.form['last_name']
         email = request.form['email']
@@ -63,16 +59,19 @@ def customer():
 @app.route("/items", methods=["POST", "GET"])
 def items():
     db_connection = connect_to_database()
+    # select all query
     if request.method == "GET":
         getAllQuery = "SELECT * from items"
         result = execute_query(db_connection, getAllQuery).fetchall()
         return render_template("items.html", items = result)
+    # search by item name 
     elif request.method == "POST" and "searchByItemName" in request.form:
         item_name = request.form['itemName']
         filteredSelectQuery = "SELECT * FROM items WHERE name = %s"
         data = [item_name]
         result = execute_query(db_connection, filteredSelectQuery, data).fetchall()
         return render_template("items.html", filteredItems = result)
+    # insert new item
     elif request.method == "POST" and "insertItem" in request.form:
         itemName = request.form['itemName']
         itemQuantity = request.form['itemQuantity']
@@ -86,16 +85,19 @@ def items():
 @app.route("/communities", methods=["POST", "GET"])
 def communities():
     db_connection = connect_to_database()
+    # select all query
     if request.method == "GET":
         getAllQuery = "SELECT * from communities"
         result = execute_query(db_connection, getAllQuery).fetchall()
         return render_template("community.html", communities = result)
+    # search query
     elif request.method == "POST" and "searchByCommunity" in request.form: 
         communityName = request.form["communityName"]
         filteredSelectQuery = "SELECT * FROM communities WHERE name = %s;"
         data = [communityName]
         result = execute_query(db_connection, filteredSelectQuery, data).fetchall()
         return render_template("community.html", filteredCommunities = result)
+    # insert query
     elif request.method == "POST" and "insertNewCommunity" in request.form:
         communityName = request.form["communityName"]
         communityDiscount = request.form["communityDiscount"]
@@ -113,11 +115,13 @@ def purchaseOrder():
     orderIDQuery = "SELECT purchase_orders.order_ID from purchase_orders"
      # use this for created date for user
     order_date = datetime.date(datetime.now())
+    # select all query
     if request.method == "GET":
         orderIDResults = execute_query(db_connection, orderIDQuery).fetchall()
         customerIDresult = execute_query(db_connection, getCustomerIDQuery).fetchall()
         result = execute_query(db_connection, getAllQuery).fetchall()
         return render_template("purchaseOrder.html", purchaseOrders = result, customerID = customerIDresult, orderID = orderIDResults)
+    # search query
     elif request.method == "POST" and "searchByPurchaseOrderID" in request.form:
         order_ID = request.form['purchaseOrderID']
         filteredSelectQuery = "SELECT * FROM purchase_orders WHERE order_ID = %s;"
@@ -127,6 +131,7 @@ def purchaseOrder():
         result = execute_query(db_connection, filteredSelectQuery,data).fetchall()
         return render_template("purchaseOrder.html", filteredPurchaseOrder = result, customerID = customerIDresult, orderID = orderIDResults)
         # update 1:M rel to be nullable
+    # update query
     elif request.method == "POST" and "updatePurchaseOrder" in request.form:
         order_ID = request.form["order_ID"]
         customer_ID = request.form["customer_ID"]
@@ -136,6 +141,7 @@ def purchaseOrder():
         data = (customer_ID, order_date, order_ID)
         result = execute_query(db_connection, updateQuery, data).fetchall()
         return redirect(url_for("purchaseOrder"))
+    # insert query
     elif request.method == "POST" and "insertPurchaseOrder" in request.form:
         customer_ID = request.form["customerID"]
         insertQuery = "INSERT INTO purchase_orders (customer_ID, order_date) VALUES (%s, %s);"
@@ -147,6 +153,7 @@ def purchaseOrder():
 @app.route("/purchaseOrderDetails", methods=["POST", "GET"])
 def purchaseOrderDetails():
     db_connection = connect_to_database()
+    # select all query
     if request.method == "GET":
         getAllQuery = "SELECT * from purchase_order_details"
         orderIDQuery = "SELECT purchase_orders.order_ID from purchase_orders"
@@ -155,6 +162,7 @@ def purchaseOrderDetails():
         orderIDResults = execute_query(db_connection, orderIDQuery).fetchall()
         itemIDResults = execute_query(db_connection, itemIDQuery).fetchall()
         return render_template("purchaseOrderDetails.html", purchaseOrderDetails = result, orderID = orderIDResults, itemID = itemIDResults)
+    # insert query
     elif request.method == "POST" and "insertPurchaseOrderDetails" in request.form:
         orderID = request.form['orderID']
         itemID = request.form['itemID']
@@ -163,7 +171,7 @@ def purchaseOrderDetails():
         data = (orderID, itemID, item_quantity)
         result = execute_query(db_connection, insertQuery, data).fetchall()
         return redirect(url_for("purchaseOrderDetails"))
-    # delete works! 
+    # delete query 
     elif request.method == "POST" and "deleteOrderItemRelationship" in request.form:
         order_ID = request.form['orderID']
         item_ID = request.form['itemID']
@@ -177,6 +185,7 @@ def purchaseOrderDetails():
 @app.route("/customerCommunities", methods=["POST", "GET"])
 def customerCommunities():
     db_connection = connect_to_database()
+    # select all query
     if request.method == "GET":
         getAllQueryCustomerCommunities = "SELECT * FROM user_communities"
         getCustomerID = "SELECT customers.customer_ID from customers"
@@ -185,14 +194,14 @@ def customerCommunities():
         customerIDresult = execute_query(db_connection, getCustomerID).fetchall()
         communityIDresult = execute_query(db_connection, getCommunityID).fetchall()
         return render_template("customerCommunities.html", customerCommunities = result, customersID =customerIDresult, communitiesID = communityIDresult)
-    # dude where was your filteredCommunities and customerCommunities in your html. it cant render unless you do this. 
+    # search query 
     elif request.method == "POST" and "searchByCustomerID" in request.form:
-        # has to be the same name as the form input...
         customer_ID = request.form['searchByCustomerID']
         filteredSelectQuery = "SELECT * FROM user_communities WHERE customer_ID = %s;"
         data = [customer_ID]
         result = execute_query(db_connection, filteredSelectQuery, data).fetchall()
         return render_template("customerCommunities.html", filteredCommunities=result)
+    # insert query
     elif request.method == "POST" and "insertNewCustomerCommunity" in request.form:
         customer_ID = request.form["customer_ID"]
         community_ID = request.form["Community_ID"]
@@ -200,8 +209,6 @@ def customerCommunities():
         data = (customer_ID, community_ID)
         result = execute_query(db_connection, insertQuery, data).fetchall()
         return redirect(url_for("customerCommunities"))
-
-# above is unfinished
 
 # allows us to not rerun server everytime we make a change 
 if __name__ == "__main__":
